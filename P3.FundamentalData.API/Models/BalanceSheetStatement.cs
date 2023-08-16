@@ -28,93 +28,93 @@ namespace P3.FundamentalData.API.Models
         [Column(TypeName = "smalldatetime")]
         public DateTime? AcceptedDate { get; set; }
         [Column(TypeName = "money")]
-        public decimal? CashAndCashEquivalents { get; set; }
+        public double? CashAndCashEquivalents { get; set; }
         [Column(TypeName = "money")]
-        public decimal? ShortTermInvestments { get; set; }
+        public double? ShortTermInvestments { get; set; }
         [Column(TypeName = "money")]
-        public decimal? CashAndShortTermInvestments { get; set; }
+        public double? CashAndShortTermInvestments { get; set; }
         [Column(TypeName = "money")]
-        public decimal? NetReceivables { get; set; }
+        public double? NetReceivables { get; set; }
         [Column(TypeName = "money")]
-        public decimal? Inventory { get; set; }
+        public double? Inventory { get; set; }
         [Column(TypeName = "money")]
-        public decimal? OtherCurrentAssets { get; set; }
+        public double? OtherCurrentAssets { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TotalCurrentAssets { get; set; }
+        public double? TotalCurrentAssets { get; set; }
         [Column(TypeName = "money")]
-        public decimal? PropertyPlantEquipmentNet { get; set; }
+        public double? PropertyPlantEquipmentNet { get; set; }
         [Column(TypeName = "money")]
-        public decimal? Goodwill { get; set; }
+        public double? Goodwill { get; set; }
         [Column(TypeName = "money")]
-        public decimal? IntangibleAssets { get; set; }
+        public double? IntangibleAssets { get; set; }
         [Column(TypeName = "money")]
-        public decimal? GoodwillAndIntangibleAssets { get; set; }
+        public double? GoodwillAndIntangibleAssets { get; set; }
         [Column(TypeName = "money")]
-        public decimal? LongTermInvestments { get; set; }
+        public double? LongTermInvestments { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TaxAssets { get; set; }
+        public double? TaxAssets { get; set; }
         [Column(TypeName = "money")]
-        public decimal? OtherNonCurrentAssets { get; set; }
+        public double? OtherNonCurrentAssets { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TotalNonCurrentAssets { get; set; }
+        public double? TotalNonCurrentAssets { get; set; }
         [Column(TypeName = "money")]
-        public decimal? OtherAssets { get; set; }
+        public double? OtherAssets { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TotalAssets { get; set; }
+        public double? TotalAssets { get; set; }
         [Column(TypeName = "money")]
-        public decimal? AccountPayables { get; set; }
+        public double? AccountPayables { get; set; }
         [Column(TypeName = "money")]
-        public decimal? ShortTermDebt { get; set; }
+        public double? ShortTermDebt { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TaxPayables { get; set; }
+        public double? TaxPayables { get; set; }
         [Column(TypeName = "money")]
-        public decimal? DeferredRevenue { get; set; }
+        public double? DeferredRevenue { get; set; }
         [Column(TypeName = "money")]
-        public decimal? OtherCurrentLiabilities { get; set; }
+        public double? OtherCurrentLiabilities { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TotalCurrentLiabilities { get; set; }
+        public double? TotalCurrentLiabilities { get; set; }
         [Column(TypeName = "money")]
-        public decimal? LongTermDebt { get; set; }
+        public double? LongTermDebt { get; set; }
         [Column(TypeName = "money")]
-        public decimal? DeferredRevenueNonCurrent { get; set; }
+        public double? DeferredRevenueNonCurrent { get; set; }
         [Column(TypeName = "money")]
-        public decimal? DeferredTaxLiabilitiesNonCurrent { get; set; }
+        public double? DeferredTaxLiabilitiesNonCurrent { get; set; }
         [Column(TypeName = "money")]
-        public decimal? OtherNonCurrentLiabilities { get; set; }
+        public double? OtherNonCurrentLiabilities { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TotalNonCurrentLiabilities { get; set; }
+        public double? TotalNonCurrentLiabilities { get; set; }
         [Column(TypeName = "money")]
-        public decimal? OtherLiabilities { get; set; }
+        public double? OtherLiabilities { get; set; }
         [Column(TypeName = "money")]
-        public decimal? CapitalLeaseObligations { get; set; }
+        public double? CapitalLeaseObligations { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TotalLiabilities { get; set; }
+        public double? TotalLiabilities { get; set; }
         [Column(TypeName = "money")]
-        public decimal? PreferredStock { get; set; }
+        public double? PreferredStock { get; set; }
         [Column(TypeName = "money")]
-        public decimal? CommonStock { get; set; }
+        public double? CommonStock { get; set; }
         [Column(TypeName = "money")]
-        public decimal? RetainedEarnings { get; set; }
+        public double? RetainedEarnings { get; set; }
         [Column(TypeName = "money")]
-        public decimal? AccumulatedOtherComprehensiveIncomeLoss { get; set; }
+        public double? AccumulatedOtherComprehensiveIncomeLoss { get; set; }
         [Column(TypeName = "money")]
-        public decimal? OtherTotalStockholdersEquity { get; set; }
+        public double? OtherTotalStockholdersEquity { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TotalStockholdersEquity { get; set; }
+        public double? TotalStockholdersEquity { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TotalEquity { get; set; }
+        public double? TotalEquity { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TotalLiabilitiesAndStockholdersEquity { get; set; }
+        public double? TotalLiabilitiesAndStockholdersEquity { get; set; }
         [Column(TypeName = "money")]
-        public decimal? MinorityInterest { get; set; }
+        public double? MinorityInterest { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TotalLiabilitiesAndTotalEquity { get; set; }
+        public double? TotalLiabilitiesAndTotalEquity { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TotalInvestments { get; set; }
+        public double? TotalInvestments { get; set; }
         [Column(TypeName = "money")]
-        public decimal? TotalDebt { get; set; }
+        public double? TotalDebt { get; set; }
         [Column(TypeName = "money")]
-        public decimal? NetDebt { get; set; }
+        public double? NetDebt { get; set; }
         [Column(TypeName = "varchar(MAX)")]
         public string Link { get; set; }
         [Column(TypeName = "varchar(MAX)")]

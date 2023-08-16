@@ -6,59 +6,87 @@ namespace P3.FundamentalData.API.Models
     public class CashFLowStatement
     {
         [Key]
-        [MaxLength(10)]
-        public string SymName { get; set; }
-
-        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
         [Required]
-        public DateTime DtDate { get; set; }
-
-        [Key]
+        [Column("SymName")]
+        public string Symbol { get; set; }
         [Required]
-        [MaxLength(5)]
+        [Column("dtDate", TypeName = "smalldatetime")]
+        public DateTime Date { get; set; }
+
+        [Required]
         public string CalendarYear { get; set; }
 
-        [Key]
         [Required]
-        [MaxLength(2)]
         public string Period { get; set; }
 
         public string ReportedCurrency { get; set; }
-        public long? Cik { get; set; }
+        public string Cik { get; set; }
         public DateTime? FillingDate { get; set; }
         public DateTime? AcceptedDate { get; set; }
-        public long? NetIncome { get; set; }
-        public long? DepreciationAndAmortization { get; set; }
-        public long? DeferredIncomeTax { get; set; }
-        public long? StockBasedCompensation { get; set; }
-        public long? ChangeInWorkingCapital { get; set; }
-        public long? AccountsReceivables { get; set; }
-        public long? Inventory { get; set; }
-        public long? AccountsPayables { get; set; }
-        public decimal? OtherWorkingCapital { get; set; }
-        public long? OtherNonCashItems { get; set; }
-        public decimal? NetCashProvidedByOperatingActivities { get; set; }
-        public decimal? InvestmentsInPropertyPlantAndEquipment { get; set; }
-        public decimal? AcquisitionsNet { get; set; }
-        public decimal? PurchasesOfInvestments { get; set; }
-        public decimal? SalesMaturitiesOfInvestments { get; set; }
-        public long? OtherInvestingActivites { get; set; }
-        public decimal? NetCashUsedForInvestingActivites { get; set; }
-        public decimal? DebtRepayment { get; set; }
-        public long? CommonStockIssued { get; set; }
-        public long? CommonStockRepurchased { get; set; }
-        public decimal? DividendsPaid { get; set; }
-        public long? OtherFinancingActivites { get; set; }
-        public decimal? NetCashUsedProvidedByFinancingActivities { get; set; }
-        public long? EffectOfForexChangesOnCash { get; set; }
-        public decimal? NetChangeInCash { get; set; }
-        public decimal? CashAtEndOfPeriod { get; set; }
-        public decimal? CashAtBeginningOfPeriod { get; set; }
-        public decimal? OperatingCashFlow { get; set; }
-        public decimal? CapitalExpenditure { get; set; }
-        public decimal? FreeCashFlow { get; set; }
+        [Column(TypeName = "money")]
+        public double? NetIncome { get; set; }
+        [Column(TypeName = "money")]
+        public double? DepreciationAndAmortization { get; set; }
+        [Column(TypeName = "money")]
+        public double? DeferredIncomeTax { get; set; }
+        [Column(TypeName = "money")]
+        public double? StockBasedCompensation { get; set; }
+        [Column(TypeName = "money")]
+        public double? ChangeInWorkingCapital { get; set; }
+        [Column(TypeName = "money")]
+        public double? AccountsReceivables { get; set; }
+        [Column(TypeName = "money")]
+        public double? Inventory { get; set; }
+        [Column(TypeName = "money")]
+        public double? AccountsPayables { get; set; }
+        [Column(TypeName = "money")]
+        public double? OtherWorkingCapital { get; set; }
+        [Column(TypeName = "money")]
+        public double? OtherNonCashItems { get; set; }
+        [Column(TypeName = "money")]
+        public double? NetCashProvidedByOperatingActivities { get; set; }
+        [Column(TypeName = "money")]
+        public double? InvestmentsInPropertyPlantAndEquipment { get; set; }
+        [Column(TypeName = "money")]
+        public double? AcquisitionsNet { get; set; }
+        [Column(TypeName = "money")]
+        public double? PurchasesOfInvestments { get; set; }
+        [Column(TypeName = "money")]
+        public double? SalesMaturitiesOfInvestments { get; set; }
+        [Column(TypeName = "money")]
+        public double? OtherInvestingActivites { get; set; }
+        [Column(TypeName = "money")]
+        public double? NetCashUsedForInvestingActivites { get; set; }
+        [Column(TypeName = "money")]
+        public double? DebtRepayment { get; set; }
+        [Column(TypeName = "money")]
+        public double? CommonStockIssued { get; set; }
+        [Column(TypeName = "money")]
+        public double? CommonStockRepurchased { get; set; }
+        [Column(TypeName = "money")]
+        public double? DividendsPaid { get; set; }
+        [Column(TypeName = "money")]
+        public double? OtherFinancingActivites { get; set; }
+        [Column(TypeName = "money")]
+        public double? NetCashUsedProvidedByFinancingActivities { get; set; }
+        [Column(TypeName = "money")]
+        public double? EffectOfForexChangesOnCash { get; set; }
+        [Column(TypeName = "money")]
+        public double? NetChangeInCash { get; set; }
+        [Column(TypeName = "money")]
+        public double? CashAtEndOfPeriod { get; set; }
+        [Column(TypeName = "money")]
+        public double? CashAtBeginningOfPeriod { get; set; }
+        [Column(TypeName = "money")]
+        public double? OperatingCashFlow { get; set; }
+        [Column(TypeName = "money")]
+        public double? CapitalExpenditure { get; set; }
+        [Column(TypeName = "money")]
+        public double? FreeCashFlow { get; set; }
         public string Link { get; set; }
         public string FinalLink { get; set; }
+        [Column("dtExecuted", TypeName = "smalldatetime")]
         public DateTime DtExecuted { get; set; } = DateTime.Now;
         public int Flag { get; set; } = 0;
     }
