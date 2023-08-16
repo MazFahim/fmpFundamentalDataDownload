@@ -22,6 +22,7 @@ namespace P3.FundamentalData.API.Controllers
             _httpClientFactory = httpClientFactory;
             _configuration = configuration;
         }
+        //Annually income statement data
         [HttpGet("financialstatment/annual-income-statement/{symbol}")]
         public async Task<IActionResult> GetAnnualIncomeStatementFromFMP(string symbol)
         {
@@ -49,6 +50,7 @@ namespace P3.FundamentalData.API.Controllers
             }
             return NotFound();
         }
+        //Quarterly income statement data
         [HttpGet("financialstatment/quarter-income-statement/{symbol}")]
         public async Task<IActionResult> GetQuarterlyIncomeStatementFromFMP(string symbol)
         {
@@ -82,6 +84,8 @@ namespace P3.FundamentalData.API.Controllers
             }
             return NotFound();
         }
+        //Annually balance sheet data
+
         [HttpGet("financialstatment/annual-balancesheet-statement/{symbol}")]
         public async Task<IActionResult> GetAnnualBalanceSheetStatementFromFMP(string symbol)
         {
@@ -98,8 +102,104 @@ namespace P3.FundamentalData.API.Controllers
                     
                     await _unitOfWork.balanceSheetStatementData.CreateAsync(balanceSheetStatementList);
                     await _unitOfWork.SaveAsync();
-                    //string sqlQuery = "exec prcProcessIncomeStatement";
-                    //await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    string sqlQuery = "exec prcProcessBalanceSheetStatement";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Quarterly balance sheet data
+        [HttpGet("financialstatment/quarterly-balancesheet-statement/{symbol}")]
+        public async Task<IActionResult> GetQuarterlyBalanceSheetStatementFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"balance-sheet-statement/{symbol}?period=quarter&limit=400&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    var balanceSheetStatementList = JsonConvert.DeserializeObject<List<BalanceSheetStatement>>(reponseData);
+                    foreach (BalanceSheetStatement item in balanceSheetStatementList)
+                    {
+                        if (item.Period == "FY")
+                        {
+                            item.Period = "Q4";
+                        }
+                    }
+                    await _unitOfWork.balanceSheetStatementData.CreateAsync(balanceSheetStatementList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessBalanceSheetStatement";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //annual Cash Flow data
+        [HttpGet("financialstatment/annually-cashFLow-statement/{symbol}")]
+        public async Task<IActionResult> GetAnnuallyCashFLowStatementFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"cash-flow-statement/{symbol}?limit=120&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    var cashFlowStatementList = JsonConvert.DeserializeObject<List<CashFLowStatement>>(reponseData);
+                    
+                    await _unitOfWork.CashFLowStatementData.CreateAsync(cashFlowStatementList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCashFlowStatement";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Quarter cash flow data
+        [HttpGet("financialstatment/quarter-cashFLow-statement/{symbol}")]
+        public async Task<IActionResult> GetQuarterlyCashFLowStatementFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"cash-flow-statement/{symbol}?period=quarter&limit=400&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    var cashFlowStatementList = JsonConvert.DeserializeObject<List<CashFLowStatement>>(reponseData);
+                    foreach (CashFLowStatement item in cashFlowStatementList)
+                    {
+                        if (item.Period == "FY")
+                        {
+                            item.Period = "Q4";
+                        }
+                    }
+                    await _unitOfWork.CashFLowStatementData.CreateAsync(cashFlowStatementList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCashFlowStatement";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {

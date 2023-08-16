@@ -12,6 +12,8 @@ namespace P3.FundamentalData.API.Repository
 
         private GenericRepository<BalanceSheetStatement> _balanceSheetStatementData;
 
+        private GenericRepository<CashFLowStatement> _CashFlowStatementData;
+
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
@@ -19,6 +21,7 @@ namespace P3.FundamentalData.API.Repository
 
         public IGenericRepository<IncomeStatement> incomeStatementData => _incomeStatementData ??= new GenericRepository<IncomeStatement>(_context);
         public IGenericRepository<BalanceSheetStatement> balanceSheetStatementData => _balanceSheetStatementData ??= new GenericRepository<BalanceSheetStatement>(_context);
+        public IGenericRepository<CashFLowStatement> CashFLowStatementData => _CashFlowStatementData ??= new GenericRepository<CashFLowStatement>(_context);
 
         public void Dispose()
         {
