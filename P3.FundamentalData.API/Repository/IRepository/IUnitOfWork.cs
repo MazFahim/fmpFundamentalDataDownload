@@ -7,7 +7,17 @@ namespace P3.FundamentalData.API.Repository.IRepository
     {
         IGenericRepository<IncomeStatement> incomeStatementData { get; }
         IGenericRepository<BalanceSheetStatement> balanceSheetStatementData { get; }
+<<<<<<< HEAD
         IGenericRepository<temp_secfilings> Temp_SecFilings { get; }
 		Task SaveAsync();
+=======
+        IGenericRepository<CashFLowStatement> CashFLowStatementData { get; }
+        IGenericRepository<IncomeStatementAsReported> IncomeStatementAsReportedData { get; }
+        IGenericRepository<BalanceSheetStatementAsReported> BalanceSheetAsReportedData { get; }
+        IGenericRepository<CashFlowStatementAsReported> CashFlowStatementAsReportedData { get; }
+        IGenericRepository<FullFinancilalStatementAsReported> FullFinancilalStatementAsReportedData { get; }
+        IGenericRepository<InternationalFilings> InternationalFilingsData { get; }
+        Task SaveAsync();
+>>>>>>> da1532c595001450f3efe728204968365c4f0829
     }
 }

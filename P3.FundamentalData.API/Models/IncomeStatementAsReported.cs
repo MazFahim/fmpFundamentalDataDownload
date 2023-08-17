@@ -6,42 +6,39 @@ namespace P3.FundamentalData.API.Models
     public class IncomeStatementAsReported
     {
         [Key]
-        [MaxLength(10)]
-        public string SymName { get; set; }
-
-        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
         [Required]
-        public DateTime DtDate { get; set; }
-
-        [Key]
+        [Column("SymName")]
+        public string Symbol { get; set; }
         [Required]
-        [MaxLength(2)]
+        [Column("dtDate", TypeName = "smalldatetime")]
+        public DateTime Date { get; set; }
         public string Period { get; set; }
-
-        public decimal? CostOfGoodsAndServicesSold { get; set; }
-        public decimal? NetIncomeLoss { get; set; }
-        public decimal? ResearchAndDevelopmentExpense { get; set; }
-        public decimal? GrossProfit { get; set; }
-        public decimal? OtherComprehensiveIncomeLossReclassificationAdjustmentFromAociForSaleOfSecuritiesNetOfTax { get; set; }
-        public decimal? OtherComprehensiveIncomeLossAvailableForSaleSecuritiesAdjustmentNetOfTax { get; set; }
-        public decimal? OtherComprehensiveIncomeLossDerivativeInstrumentGainLossBeforeReclassificationAfterTax { get; set; }
-        public decimal? OtherComprehensiveIncomeLossForeignCurrencyTransactionAndTranslationAdjustmentNetOfTax { get; set; }
+        public double? CostOfGoodsAndServicesSold { get; set; }
+        public double? NetIncomeLoss { get; set; }
+        public double? ResearchAndDevelopmentExpense { get; set; }
+        public double? GrossProfit { get; set; }
+        public double? OtherComprehensiveIncomeLossReclassificationAdjustmentFromAociForSaleOfSecuritiesNetOfTax { get; set; }
+        public double? OtherComprehensiveIncomeLossAvailableForSaleSecuritiesAdjustmentNetOfTax { get; set; }
+        public double? OtherComprehensiveIncomeLossDerivativeInstrumentGainLossBeforeReclassificationAfterTax { get; set; }
+        public double? OtherComprehensiveIncomeLossForeignCurrencyTransactionAndTranslationAdjustmentNetOfTax { get; set; }
         public long? WeightedAverageNumberOfDilutedSharesOutstanding { get; set; }
-        public decimal? WeightedAverageNumberOfSharesOutstandingBasic { get; set; }
-        public decimal? OperatingIncomeLoss { get; set; }
-        public decimal? NonOperatingIncomeExpense { get; set; }
-        public decimal? IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest { get; set; }
-        public decimal? EarningsPerShareBasic { get; set; }
-        public decimal? IncomeTaxExpenseBenefit { get; set; }
-        public decimal? OtherComprehensiveIncomeUnrealizedHoldingGainLossOnSecuritiesArisingDuringPeriodNetOfTax { get; set; }
-        public decimal? RevenueFromContractWithCustomerExcludingAssessedTax { get; set; }
-        public decimal? EarningsPerShareDiluted { get; set; }
-        public decimal? OperatingExpenses { get; set; }
-        public decimal? OtherComprehensiveIncomeLossDerivativeInstrumentGainLossAfterReclassificationAndTax { get; set; }
-        public decimal? SellingGeneralAndAdministrativeExpense { get; set; }
-        public decimal? OtherComprehensiveIncomeLossDerivativeInstrumentGainLossReclassificationAfterTax { get; set; }
-        public decimal? OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToParent { get; set; }
-        public decimal? ComprehensiveIncomeNetOfTax { get; set; }
+        public double? WeightedAverageNumberOfSharesOutstandingBasic { get; set; }
+        public double? OperatingIncomeLoss { get; set; }
+        public double? NonOperatingIncomeExpense { get; set; }
+        public double? IncomeLossFromContinuingOperationsBeforeIncomeTaxesExtraordinaryItemsNoncontrollingInterest { get; set; }
+        public double? EarningsPerShareBasic { get; set; }
+        public double? IncomeTaxExpenseBenefit { get; set; }
+        public double? OtherComprehensiveIncomeUnrealizedHoldingGainLossOnSecuritiesArisingDuringPeriodNetOfTax { get; set; }
+        public double? RevenueFromContractWithCustomerExcludingAssessedTax { get; set; }
+        public double? EarningsPerShareDiluted { get; set; }
+        public double? OperatingExpenses { get; set; }
+        public double? OtherComprehensiveIncomeLossDerivativeInstrumentGainLossAfterReclassificationAndTax { get; set; }
+        public double? SellingGeneralAndAdministrativeExpense { get; set; }
+        public double? OtherComprehensiveIncomeLossDerivativeInstrumentGainLossReclassificationAfterTax { get; set; }
+        public double? OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToParent { get; set; }
+        public double? ComprehensiveIncomeNetOfTax { get; set; }
+        [Column("dtExecuted", TypeName = "smalldatetime")]
         public DateTime DtExecuted { get; set; } = DateTime.Now;
         public int Flag { get; set; } = 0;
     }
