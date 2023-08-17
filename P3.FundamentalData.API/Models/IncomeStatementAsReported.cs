@@ -5,8 +5,14 @@ namespace P3.FundamentalData.API.Models
 {
     public class IncomeStatementAsReported
     {
-        public string SymName { get; set; }
-        public DateTime DtDate { get; set; }
+        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
+        [Required]
+        [Column("SymName")]
+        public string Symbol { get; set; }
+        [Required]
+        [Column("dtDate", TypeName = "smalldatetime")]
+        public DateTime Date { get; set; }
         public string Period { get; set; }
         public double? CostOfGoodsAndServicesSold { get; set; }
         public double? NetIncomeLoss { get; set; }
@@ -32,6 +38,7 @@ namespace P3.FundamentalData.API.Models
         public double? OtherComprehensiveIncomeLossDerivativeInstrumentGainLossReclassificationAfterTax { get; set; }
         public double? OtherComprehensiveIncomeLossNetOfTaxPortionAttributableToParent { get; set; }
         public double? ComprehensiveIncomeNetOfTax { get; set; }
+        [Column("dtExecuted", TypeName = "smalldatetime")]
         public DateTime DtExecuted { get; set; } = DateTime.Now;
         public int Flag { get; set; } = 0;
     }
