@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using P3.FundamentalData.API.Models;
+using P3.FundamentalData.API.Models.Domain;
 using P3.FundamentalData.API.Repository;
 using P3.FundamentalData.API.Repository.IRepository;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -109,5 +110,37 @@ namespace P3.FundamentalData.API.Controllers
             }
             return NotFound();
         }
+
+        [HttpGet("financialstatment/secfillings/{symbol}")]
+        public async Task GetSecFillings(string symbol)
+        {
+			var apiKey = _configuration["APIInfo:Key"].ToString();
+			var client = _httpClientFactory.CreateClient("baseurl");
+            var count = 0;
+			// sec_filings / AAPL ? page = 25 & apikey = 2b2bbacbc149bcba58903f591ae3d3c8
+			var response = await client.GetAsync($"sec_filings/{symbol.ToUpper()}?page={count}&apikey={apiKey}");
+            if (response.IsSuccessStatusCode)
+            {
+			    var reponseData = await response.Content.ReadAsStringAsync();
+				var sec_fills = JsonConvert.DeserializeObject<List<temp_secfilings>>(reponseData);
+                var sec_fills_list= new List<temp_secfilings>();
+
+				while (sec_fills.Count != 0)
+                {
+					count++;
+                    sec_fills_list.AddRange(sec_fills);
+					response = await client.GetAsync($"sec_filings/{symbol.ToUpper()}?page={count}&apikey={apiKey}");
+					reponseData = await response.Content.ReadAsStringAsync();
+					sec_fills = JsonConvert.DeserializeObject<List<temp_secfilings>>(reponseData);
+
+				}
+                await _unitOfWork.Temp_SecFilings.CreateAsync(sec_fills_list);
+                await _unitOfWork.SaveAsync();
+                Console.WriteLine(sec_fills);
+
+			}
+
+
+		}
     }
 }
