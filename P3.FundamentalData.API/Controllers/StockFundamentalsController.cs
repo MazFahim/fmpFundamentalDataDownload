@@ -35,6 +35,10 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
                     var incomeStatementList = JsonConvert.DeserializeObject<List<IncomeStatement>>(reponseData);
                     await _unitOfWork.incomeStatementData.CreateAsync(incomeStatementList);
                     await _unitOfWork.SaveAsync();
@@ -63,6 +67,10 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
                     var incomeStatementList = JsonConvert.DeserializeObject<List<IncomeStatement>>(reponseData);
                     foreach (IncomeStatement item in incomeStatementList)
                     {
@@ -98,6 +106,10 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
                     var balanceSheetStatementList = JsonConvert.DeserializeObject<List<BalanceSheetStatement>>(reponseData);
                     
                     await _unitOfWork.balanceSheetStatementData.CreateAsync(balanceSheetStatementList);
@@ -126,6 +138,10 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
                     var balanceSheetStatementList = JsonConvert.DeserializeObject<List<BalanceSheetStatement>>(reponseData);
                     foreach (BalanceSheetStatement item in balanceSheetStatementList)
                     {
@@ -160,6 +176,10 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
                     var cashFlowStatementList = JsonConvert.DeserializeObject<List<CashFLowStatement>>(reponseData);
                     
                     await _unitOfWork.CashFLowStatementData.CreateAsync(cashFlowStatementList);
@@ -188,6 +208,10 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
                     var cashFlowStatementList = JsonConvert.DeserializeObject<List<CashFLowStatement>>(reponseData);
                     foreach (CashFLowStatement item in cashFlowStatementList)
                     {
@@ -199,6 +223,312 @@ namespace P3.FundamentalData.API.Controllers
                     await _unitOfWork.CashFLowStatementData.CreateAsync(cashFlowStatementList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessCashFlowStatement";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Annual Income statements as reported data
+        [HttpGet("financialstatment/annual-incomestatement-asreported/{symbol}")]
+        public async Task<IActionResult> GetAnnualIncomeStatementAsReportedFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"income-statement-as-reported/{symbol}?limit=10&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if(reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var incomeStatementAsReportedList = JsonConvert.DeserializeObject<List<IncomeStatementAsReported>>(reponseData);
+                    
+                    await _unitOfWork.IncomeStatementAsReportedData.CreateAsync(incomeStatementAsReportedList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessIncomeStatementAsReported";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Quarterly Income Statement As Reported data
+        [HttpGet("financialstatment/quarterly-incomestatement-asreported/{symbol}")]
+        public async Task<IActionResult> GetQuarterlyIncomeStatementAsReportedFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"income-statement-as-reported/{symbol}?period=quarter&limit=50&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var incomeStatementAsReportedList = JsonConvert.DeserializeObject<List<IncomeStatementAsReported>>(reponseData);
+
+                    await _unitOfWork.IncomeStatementAsReportedData.CreateAsync(incomeStatementAsReportedList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessIncomeStatementAsReported";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //annual Balance SHeet As Reported data
+        [HttpGet("financialstatment/annually-BalanceSheetStatement-AsReported/{symbol}")]
+        public async Task<IActionResult> GetAnnuallyBalanceSheetStatementAsReportedFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"balance-sheet-statement-as-reported/{symbol}?limit=10&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var balanceSheetAsRportedList = JsonConvert.DeserializeObject<List<BalanceSheetStatementAsReported>>(reponseData);
+
+                    await _unitOfWork.BalanceSheetAsReportedData.CreateAsync(balanceSheetAsRportedList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessBalanceSheetStatementAsReported";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Quarter BalanceSheet As Reported data
+        [HttpGet("financialstatment/quarter-BalanceSheet-AsReported/{symbol}")]
+        public async Task<IActionResult> GetQuarterlyBalanceSheetAsReportedFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"balance-sheet-statement-as-reported/{symbol}?period=quarter&limit=50&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var balanceSheetAsRportedList = JsonConvert.DeserializeObject<List<BalanceSheetStatementAsReported>>(reponseData);
+                    foreach (BalanceSheetStatementAsReported item in balanceSheetAsRportedList)
+                    {
+                        if (item.Period == "FY")
+                        {
+                            item.Period = "Q4";
+                        }
+                    }
+                    await _unitOfWork.BalanceSheetAsReportedData.CreateAsync(balanceSheetAsRportedList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessBalanceSheetStatementAsReported";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //annual Cash FLow As Reported data
+        [HttpGet("financialstatment/annually-cashflowstatement-AsReported/{symbol}")]
+        public async Task<IActionResult> GetAnnualCashFlowStatementAsReportedFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"cash-flow-statement-as-reported/{symbol}?limit=10&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var cashFlowAsRportedList = JsonConvert.DeserializeObject<List<CashFlowStatementAsReported>>(reponseData);
+
+                    await _unitOfWork.CashFlowStatementAsReportedData.CreateAsync(cashFlowAsRportedList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCashFlowStatementAsReported";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Quarter BalanceSheet As Reported data
+        [HttpGet("financialstatment/quarter-CashFLow-AsReported/{symbol}")]
+        public async Task<IActionResult> GetQuarterCashFlowStatementAsReportedFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"cash-flow-statement-as-reported/{symbol}?period=quarter&limit=50&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var cashFlowAsRportedList = JsonConvert.DeserializeObject<List<CashFlowStatementAsReported>>(reponseData);
+                    foreach (CashFlowStatementAsReported item in cashFlowAsRportedList)
+                    {
+                        if (item.Period == "FY")
+                        {
+                            item.Period = "Q4";
+                        }
+                    }
+                    await _unitOfWork.CashFlowStatementAsReportedData.CreateAsync(cashFlowAsRportedList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCashFlowStatementAsReported";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //annual Full Financial Statement As Reported data
+        [HttpGet("financialstatment/annually-fullfinancialstatement-AsReported/{symbol}")]
+        public async Task<IActionResult> GetAnnualFullFinancialStatementAsReportedFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"financial-statement-full-as-reported/{symbol}?apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var fullFinancilalStatementAsReportedList = JsonConvert.DeserializeObject<List<FullFinancilalStatementAsReported>>(reponseData);
+
+                    await _unitOfWork.FullFinancilalStatementAsReportedData.CreateAsync(fullFinancilalStatementAsReportedList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessFullFinancialStatementAsReported";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //quarterly Full Financial Statement As Reported data
+        [HttpGet("financialstatment/quarterly-fullfinancialstatement-AsReported/{symbol}")]
+        public async Task<IActionResult> GetQuarterlyFullFinancialStatementAsReportedFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"financial-statement-full-as-reported/{symbol}?period=quarter&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var fullFinancilalStatementAsReportedList = JsonConvert.DeserializeObject<List<FullFinancilalStatementAsReported>>(reponseData);
+                    foreach (FullFinancilalStatementAsReported item in fullFinancilalStatementAsReportedList)
+                    {
+                        if (item.Period == "FY")
+                        {
+                            item.Period = "Q4";
+                        }
+                    }
+                    await _unitOfWork.FullFinancilalStatementAsReportedData.CreateAsync(fullFinancilalStatementAsReportedList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessFullFinancialStatementAsReported";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //annual Canadian Stock data
+        [HttpGet("financialstatment/annually-fullfinancialstatement-AsReported/{symbol}")]
+        public async Task<IActionResult> GetAnnualFullFinancialStatementAsReportedFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"financial-statement-full-as-reported/{symbol}?apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var fullFinancilalStatementAsReportedList = JsonConvert.DeserializeObject<List<FullFinancilalStatementAsReported>>(reponseData);
+
+                    await _unitOfWork.FullFinancilalStatementAsReportedData.CreateAsync(fullFinancilalStatementAsReportedList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessFullFinancialStatementAsReported";
                     await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
