@@ -508,38 +508,6 @@ namespace P3.FundamentalData.API.Controllers
             }
             return NotFound();
         }
-        //annual Canadian Stock data
-        [HttpGet("financialstatment/annually-fullfinancialstatement-AsReported/{symbol}")]
-        public async Task<IActionResult> GetAnnualFullFinancialStatementAsReportedFromFMP(string symbol)
-        {
-            var apiKey = _configuration["APIInfo:Key"].ToString();
-            var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"financial-statement-full-as-reported/{symbol}?apikey={apiKey}");
-
-            if (response.IsSuccessStatusCode)
-            {
-                try
-                {
-                    var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
-                    var fullFinancilalStatementAsReportedList = JsonConvert.DeserializeObject<List<FullFinancilalStatementAsReported>>(reponseData);
-
-                    await _unitOfWork.FullFinancilalStatementAsReportedData.CreateAsync(fullFinancilalStatementAsReportedList);
-                    await _unitOfWork.SaveAsync();
-                    string sqlQuery = "exec prcProcessFullFinancialStatementAsReported";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest();
-                }
-                return Ok();
-            }
-            return NotFound();
-        }
 
         [HttpGet("financialstatment/secfillings/{symbol}")]
         public async Task GetSecFillings(string symbol)
