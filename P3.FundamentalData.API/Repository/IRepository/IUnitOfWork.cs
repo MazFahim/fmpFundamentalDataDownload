@@ -27,6 +27,7 @@ namespace P3.FundamentalData.API.Repository.IRepository
         IGenericRepository<CompanyEnterpriseValue> CompanyEnterpriseValueData { get; }
         IGenericRepository<IncomeStatementsGrowth> IncomeStatementsGrowthData { get; }
         IGenericRepository<BalanceSheetGrowth> BalanceSheetGrowthData { get; }
+        IGenericRepository<CashFlowStatementsGrowth> CashFlowStatementsGrowthData { get; }
 
 
         // Major Indexes tables

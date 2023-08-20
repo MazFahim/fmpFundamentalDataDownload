@@ -327,5 +327,40 @@ namespace P3.FundamentalData.API.Controllers
             }
             return NotFound();
         }
+        //cash flow growth data
+        [HttpGet("financial-statement-growth/cash-flow-growth/{symbol}")]
+        public async Task<IActionResult> GetCashFlowGrowthFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"v3/cash-flow-statement-growth/{symbol}?limit=40&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var cashFlowStatementsGrowthList = JsonConvert.DeserializeObject<List<CashFlowStatementsGrowth>>(reponseData);
+                    foreach (CashFlowStatementsGrowth item in cashFlowStatementsGrowthList)
+                    {
+                        if (item.Period == null)
+                        {
+                            item.Period = "FY";
+                        }
+                    }
+                    await _unitOfWork.CashFlowStatementsGrowthData.CreateAsync(cashFlowStatementsGrowthList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessBalanceSheetGrowth";
+                    //await _unitOfWork.CashFlowStatementsGrowthData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
     }
 }

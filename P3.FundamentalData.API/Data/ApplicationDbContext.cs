@@ -32,6 +32,7 @@ namespace P3.FundamentalData.API.Data
         public DbSet<CompanyEnterpriseValue> Temp_CompanyEnterpriseValue { get; set; }
         public DbSet<IncomeStatementsGrowth> Temp_IncomeStatementsGrowth { get; set; }
         public DbSet<BalanceSheetGrowth> Temp_BalanceSheetGrowth { get; set; }
+        public DbSet<CashFlowStatementsGrowth> Temp_CashFlowStatementsGrowth { get; set; }
 
    
 
