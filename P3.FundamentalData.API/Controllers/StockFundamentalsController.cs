@@ -37,10 +37,7 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
+                     
                     var incomeStatementList = JsonConvert.DeserializeObject<List<IncomeStatement>>(reponseData);
                     await _unitOfWork.incomeStatementData.CreateAsync(incomeStatementList);
                     await _unitOfWork.SaveAsync();
@@ -69,10 +66,7 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
+                    
                     var incomeStatementList = JsonConvert.DeserializeObject<List<IncomeStatement>>(reponseData);
                     foreach (IncomeStatement item in incomeStatementList)
                     {
@@ -108,16 +102,13 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
+                    
                     var balanceSheetStatementList = JsonConvert.DeserializeObject<List<BalanceSheetStatement>>(reponseData);
                     
                     await _unitOfWork.balanceSheetStatementData.CreateAsync(balanceSheetStatementList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessBalanceSheetStatement";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.balanceSheetStatementData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -140,10 +131,6 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
                     var balanceSheetStatementList = JsonConvert.DeserializeObject<List<BalanceSheetStatement>>(reponseData);
                     foreach (BalanceSheetStatement item in balanceSheetStatementList)
                     {
@@ -155,7 +142,7 @@ namespace P3.FundamentalData.API.Controllers
                     await _unitOfWork.balanceSheetStatementData.CreateAsync(balanceSheetStatementList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessBalanceSheetStatement";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.balanceSheetStatementData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -178,16 +165,12 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
                     var cashFlowStatementList = JsonConvert.DeserializeObject<List<CashFLowStatement>>(reponseData);
                     
                     await _unitOfWork.CashFLowStatementData.CreateAsync(cashFlowStatementList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessCashFlowStatement";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.CashFLowStatementData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -210,10 +193,6 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
                     var cashFlowStatementList = JsonConvert.DeserializeObject<List<CashFLowStatement>>(reponseData);
                     foreach (CashFLowStatement item in cashFlowStatementList)
                     {
@@ -225,7 +204,7 @@ namespace P3.FundamentalData.API.Controllers
                     await _unitOfWork.CashFLowStatementData.CreateAsync(cashFlowStatementList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessCashFlowStatement";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.CashFLowStatementData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -248,16 +227,12 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if(reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
                     var incomeStatementAsReportedList = JsonConvert.DeserializeObject<List<IncomeStatementAsReported>>(reponseData);
                     
                     await _unitOfWork.IncomeStatementAsReportedData.CreateAsync(incomeStatementAsReportedList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessIncomeStatementAsReported";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.IncomeStatementAsReportedData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -280,16 +255,12 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
                     var incomeStatementAsReportedList = JsonConvert.DeserializeObject<List<IncomeStatementAsReported>>(reponseData);
 
                     await _unitOfWork.IncomeStatementAsReportedData.CreateAsync(incomeStatementAsReportedList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessIncomeStatementAsReported";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.IncomeStatementAsReportedData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -312,16 +283,12 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
                     var balanceSheetAsRportedList = JsonConvert.DeserializeObject<List<BalanceSheetStatementAsReported>>(reponseData);
 
                     await _unitOfWork.BalanceSheetAsReportedData.CreateAsync(balanceSheetAsRportedList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessBalanceSheetStatementAsReported";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.BalanceSheetAsReportedData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -344,10 +311,6 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
                     var balanceSheetAsRportedList = JsonConvert.DeserializeObject<List<BalanceSheetStatementAsReported>>(reponseData);
                     foreach (BalanceSheetStatementAsReported item in balanceSheetAsRportedList)
                     {
@@ -359,7 +322,7 @@ namespace P3.FundamentalData.API.Controllers
                     await _unitOfWork.BalanceSheetAsReportedData.CreateAsync(balanceSheetAsRportedList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessBalanceSheetStatementAsReported";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.BalanceSheetAsReportedData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -382,16 +345,12 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
                     var cashFlowAsRportedList = JsonConvert.DeserializeObject<List<CashFlowStatementAsReported>>(reponseData);
 
                     await _unitOfWork.CashFlowStatementAsReportedData.CreateAsync(cashFlowAsRportedList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessCashFlowStatementAsReported";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.CashFlowStatementAsReportedData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -414,10 +373,6 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
                     var cashFlowAsRportedList = JsonConvert.DeserializeObject<List<CashFlowStatementAsReported>>(reponseData);
                     foreach (CashFlowStatementAsReported item in cashFlowAsRportedList)
                     {
@@ -429,7 +384,7 @@ namespace P3.FundamentalData.API.Controllers
                     await _unitOfWork.CashFlowStatementAsReportedData.CreateAsync(cashFlowAsRportedList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessCashFlowStatementAsReported";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.CashFlowStatementAsReportedData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -452,16 +407,12 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
                     var fullFinancilalStatementAsReportedList = JsonConvert.DeserializeObject<List<FullFinancilalStatementAsReported>>(reponseData);
 
                     await _unitOfWork.FullFinancilalStatementAsReportedData.CreateAsync(fullFinancilalStatementAsReportedList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessFullFinancialStatementAsReported";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.FullFinancilalStatementAsReportedData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -484,10 +435,7 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData.IsNullOrEmpty())
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
+                    
                     var fullFinancilalStatementAsReportedList = JsonConvert.DeserializeObject<List<FullFinancilalStatementAsReported>>(reponseData);
                     foreach (FullFinancilalStatementAsReported item in fullFinancilalStatementAsReportedList)
                     {
@@ -499,7 +447,7 @@ namespace P3.FundamentalData.API.Controllers
                     await _unitOfWork.FullFinancilalStatementAsReportedData.CreateAsync(fullFinancilalStatementAsReportedList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessFullFinancialStatementAsReported";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.FullFinancilalStatementAsReportedData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -509,6 +457,7 @@ namespace P3.FundamentalData.API.Controllers
             }
             return NotFound();
         }
+
         //Shares Float data
         [HttpGet("financialstatment/shares-float/{symbol}")]
         public async Task<IActionResult> GetSharesFloatFromFMP(string symbol)
@@ -521,16 +470,13 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
+                     
                     var sharesFloatList = JsonConvert.DeserializeObject<List<SharesFloat>>(reponseData);
 
                     await _unitOfWork.SharesFloatData.CreateAsync(sharesFloatList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessSharesFloat";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.SharesFloatData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -553,118 +499,13 @@ namespace P3.FundamentalData.API.Controllers
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
+                     
                     var companyNotesDueList = JsonConvert.DeserializeObject<List<CompanyNotesDue>>(reponseData);
 
                     await _unitOfWork.CompanyNotesDueData.CreateAsync(companyNotesDueList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessCompanyNotesDue";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest();
-                }
-                return Ok();
-            }
-            return NotFound();
-        }
-        //Annul Company Financial Ratio Data
-        [HttpGet("financialstatment/annual-company-financial-ratio/{symbol}")]
-        public async Task<IActionResult> GetAnnualCompanyFinancialRatioFromFMP(string symbol)
-        {
-            var apiKey = _configuration["APIInfo:Key"].ToString();
-            var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"v3/ratios/{symbol}?limit=40&apikey={apiKey}");
-
-            if (response.IsSuccessStatusCode)
-            {
-                try
-                {
-                    var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
-                    var companyFinancialRatioList = JsonConvert.DeserializeObject<List<CompanyFinancialRatio>>(reponseData);
-
-                    await _unitOfWork.CompanyFinancialRatioData.CreateAsync(companyFinancialRatioList);
-                    await _unitOfWork.SaveAsync();
-                    string sqlQuery = "exec prcProcessCompanyFinancialRatio";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest();
-                }
-                return Ok();
-            }
-            return NotFound();
-        }
-        //Quarterly Company Financial Ratio Data
-        [HttpGet("financialstatment/quarter-company-financial-ratio/{symbol}")]
-        public async Task<IActionResult> GetQuarterCompanyFinancialRatioFromFMP(string symbol)
-        {
-            var apiKey = _configuration["APIInfo:Key"].ToString();
-            var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"v3/ratios/{symbol}?period=quarter&limit=140&apikey={apiKey}");
-
-            if (response.IsSuccessStatusCode)
-            {
-                try
-                {
-                    var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
-                    var companyFinancialRatioList = JsonConvert.DeserializeObject<List<CompanyFinancialRatio>>(reponseData);
-                    foreach (CompanyFinancialRatio item in companyFinancialRatioList)
-                    {
-                        if (item.period == "FY")
-                        {
-                            item.period = "Q4";
-                        }
-                    }
-                    await _unitOfWork.CompanyFinancialRatioData.CreateAsync(companyFinancialRatioList);
-                    await _unitOfWork.SaveAsync();
-                    string sqlQuery = "exec prcProcessCompanyFinancialRatio";
-                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
-                }
-                catch (Exception ex)
-                {
-                    return BadRequest();
-                }
-                return Ok();
-            }
-            return NotFound();
-        }
-        //Company Financial Ratio TTM Data
-        [HttpGet("financialstatment/company-financial-ratio-ttm/{symbol}")]
-        public async Task<IActionResult> GetCompanyFinancialRatioTTMFromFMP(string symbol)
-        {
-            var apiKey = _configuration["APIInfo:Key"].ToString();
-            var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"v3/ratios-ttm/{symbol}?apikey={apiKey}");
-
-            if (response.IsSuccessStatusCode)
-            {
-                try
-                {
-                    var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
-                    {
-                        return Ok("FMP didn't provide any data for this API");
-                    }
-                    var companyFinancialRatioTTMList = JsonConvert.DeserializeObject<List<CompanyFinancialRatiosTTM>>(reponseData);
-
-                    await _unitOfWork.CompanyFinancialRatiosTTMData.CreateAsync(companyFinancialRatioTTMList);
-                    await _unitOfWork.SaveAsync();
-                    //string sqlQuery = "exec prcProcessCompanyFinancialRatio";
-                    //await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                    await _unitOfWork.CompanyNotesDueData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
