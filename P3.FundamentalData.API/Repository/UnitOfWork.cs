@@ -1,5 +1,6 @@
 ﻿using P3.FundamentalData.API.Data;
 using P3.FundamentalData.API.Models;
+using P3.FundamentalData.API.Models.Domain;
 using P3.FundamentalData.API.Repository.IRepository;
 
 namespace P3.FundamentalData.API.Repository
@@ -9,7 +10,6 @@ namespace P3.FundamentalData.API.Repository
         private readonly ApplicationDbContext _context;
 
         private GenericRepository<IncomeStatement> _incomeStatementData;
-
         private GenericRepository<BalanceSheetStatement> _balanceSheetStatementData;
 
         private GenericRepository<CashFLowStatement> _CashFlowStatementData;
@@ -32,6 +32,13 @@ namespace P3.FundamentalData.API.Repository
 
         private GenericRepository<CompanyFinancialRatiosTTM> _CompanyFinancialRatiosTTMData;
 
+        private GenericRepository<temp_secfilings> _temp_secfilings;
+		    private GenericRepository<CashFLowStatement> _CashFlowStatementData;
+		    private GenericRepository<IncomeStatementAsReported> _IncomeStatementAsReportedData;
+		    private GenericRepository<BalanceSheetStatementAsReported> _BalanceSheetAsReportedData;
+        private GenericRepository<CashFlowStatementAsReported> _CashFlowStatementAsReportedData;
+        private GenericRepository<FullFinancilalStatementAsReported> _FullFinancilalStatementAsReportedData;
+        private GenericRepository<InternationalFilings> _InternationalFilingsData;
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
@@ -39,6 +46,8 @@ namespace P3.FundamentalData.API.Repository
 
         public IGenericRepository<IncomeStatement> incomeStatementData => _incomeStatementData ??= new GenericRepository<IncomeStatement>(_context);
         public IGenericRepository<BalanceSheetStatement> balanceSheetStatementData => _balanceSheetStatementData ??= new GenericRepository<BalanceSheetStatement>(_context);
+        public IGenericRepository<temp_secfilings> Temp_SecFilings => _temp_secfilings ??= new GenericRepository<temp_secfilings>(_context);
+
         public IGenericRepository<CashFLowStatement> CashFLowStatementData => _CashFlowStatementData ??= new GenericRepository<CashFLowStatement>(_context);
         public IGenericRepository<IncomeStatementAsReported> IncomeStatementAsReportedData => _IncomeStatementAsReportedData ??= new GenericRepository<IncomeStatementAsReported>(_context);
         public IGenericRepository<BalanceSheetStatementAsReported> BalanceSheetAsReportedData => _BalanceSheetAsReportedData ??= new GenericRepository<BalanceSheetStatementAsReported>(_context);
@@ -50,7 +59,8 @@ namespace P3.FundamentalData.API.Repository
         public IGenericRepository<CompanyFinancialRatio> CompanyFinancialRatioData => _CompanyFinancialRatioData ??= new GenericRepository<CompanyFinancialRatio>(_context);
         public IGenericRepository<CompanyFinancialRatiosTTM> CompanyFinancialRatiosTTMData => _CompanyFinancialRatiosTTMData ??= new GenericRepository<CompanyFinancialRatiosTTM>(_context);
 
-        public void Dispose()
+
+		public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
