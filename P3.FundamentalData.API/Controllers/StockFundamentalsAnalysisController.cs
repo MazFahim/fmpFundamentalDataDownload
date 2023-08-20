@@ -537,5 +537,63 @@ namespace P3.FundamentalData.API.Controllers
             }
             return NotFound();
         }
+        //Historic Companies Rating
+        [HttpGet("rating/historic-companies-rating/{symbol}")]
+        public async Task<IActionResult> GetHistoricCompaniesRatingFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v3/historical-rating/{symbol}?limit=100&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var historicalCompaniesRatingList = JsonConvert.DeserializeObject<List<HistoricalCompaniesRating>>(reponseData);
+                    
+                    await _unitOfWork.HistoricalCompaniesRatingData.CreateAsync(historicalCompaniesRatingList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessHistoricCompaniesRating";
+                    await _unitOfWork.HistoricalCompaniesRatingData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Daily Companies Rating
+        [HttpGet("rating/daily-companies-rating/{symbol}")]
+        public async Task<IActionResult> GetDailyCompaniesRatingFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v3/rating/{symbol}?apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var historicalCompaniesRatingList = JsonConvert.DeserializeObject<List<HistoricalCompaniesRating>>(reponseData);
+
+                    await _unitOfWork.HistoricalCompaniesRatingData.CreateAsync(historicalCompaniesRatingList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessHistoricCompaniesRating";
+                    await _unitOfWork.HistoricalCompaniesRatingData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
     }
 }
