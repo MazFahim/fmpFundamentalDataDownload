@@ -704,7 +704,7 @@ namespace P3.FundamentalData.API.Controllers
 			}
 
 
-		}
+	}
 
-    }
 }
+

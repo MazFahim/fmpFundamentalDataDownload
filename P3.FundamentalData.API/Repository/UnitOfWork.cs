@@ -33,19 +33,6 @@ namespace P3.FundamentalData.API.Repository
         private GenericRepository<CompanyFinancialRatiosTTM> _CompanyFinancialRatiosTTMData;
 
         private GenericRepository<temp_secfilings> _temp_secfilings;
-		private GenericRepository<CashFLowStatement> _CashFlowStatementData;
-		private GenericRepository<IncomeStatementAsReported> _IncomeStatementAsReportedData;
-		private GenericRepository<BalanceSheetStatementAsReported> _BalanceSheetAsReportedData;
-        private GenericRepository<CashFlowStatementAsReported> _CashFlowStatementAsReportedData;
-        private GenericRepository<FullFinancilalStatementAsReported> _FullFinancilalStatementAsReportedData;
-        private GenericRepository<InternationalFilings> _InternationalFilingsData;
-
-		private GenericRepository<CashFLowStatement> _CashFlowStatementData;
-		private GenericRepository<IncomeStatementAsReported> _IncomeStatementAsReportedData;
-		private GenericRepository<BalanceSheetStatementAsReported> _BalanceSheetAsReportedData;
-		private GenericRepository<CashFlowStatementAsReported> _CashFlowStatementAsReportedData;
-		private GenericRepository<FullFinancilalStatementAsReported> _FullFinancilalStatementAsReportedData;
-		private GenericRepository<InternationalFilings> _InternationalFilingsData;
         private GenericRepository<MajorIndexes> _majorIndexes;
         private GenericRepository<CompanyListSP500> _listSandP;
         private GenericRepository<TempHistoricalSP500> _tempHistoricalSP500;
