@@ -37,6 +37,7 @@ namespace P3.FundamentalData.API.Repository
         private GenericRepository<MajorIndexes> _majorIndexes;
         private GenericRepository<CompanyListSP500> _listSandP;
         private GenericRepository<TempHistoricalSP500> _tempHistoricalSP500;
+        private GenericRepository<Temp_BulkData> _temp_bulkdata;
 		public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
@@ -69,7 +70,8 @@ namespace P3.FundamentalData.API.Repository
         public IGenericRepository<MajorIndexes> majorIndexesData => _majorIndexes ??= new GenericRepository<MajorIndexes>(_context);
         public IGenericRepository<CompanyListSP500> temp_ListSandP => _listSandP ??= new GenericRepository<CompanyListSP500>(_context);
         public IGenericRepository<TempHistoricalSP500> temp_HistoricalSP500 => _tempHistoricalSP500 ??= new GenericRepository<TempHistoricalSP500>(_context);
-		public void Dispose()
+		public IGenericRepository<Temp_BulkData> temp_BulkData => _temp_bulkdata ??= new GenericRepository<Temp_BulkData>(_context);    
+        public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
