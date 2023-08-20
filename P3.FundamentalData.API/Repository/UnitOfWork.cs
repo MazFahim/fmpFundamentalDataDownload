@@ -6,37 +6,34 @@ namespace P3.FundamentalData.API.Repository
 {
     public class UnitOfWork : IUnitOfWork
     {
+        //Stock Fundamentals
         private readonly ApplicationDbContext _context;
 
         private GenericRepository<IncomeStatement> _incomeStatementData;
-
         private GenericRepository<BalanceSheetStatement> _balanceSheetStatementData;
-
         private GenericRepository<CashFLowStatement> _CashFlowStatementData;
-
         private GenericRepository<IncomeStatementAsReported> _IncomeStatementAsReportedData;
-
         private GenericRepository<BalanceSheetStatementAsReported> _BalanceSheetAsReportedData;
-
         private GenericRepository<CashFlowStatementAsReported> _CashFlowStatementAsReportedData;
-
         private GenericRepository<FullFinancilalStatementAsReported> _FullFinancilalStatementAsReportedData;
-
         private GenericRepository<InternationalFilings> _InternationalFilingsData;
-
-        private GenericRepository<SharesFloat> _SharesFloatData;
-        
+        private GenericRepository<SharesFloat> _SharesFloatData;        
         private GenericRepository<CompanyNotesDue> _CompanyNotesDueData;
-
         private GenericRepository<CompanyFinancialRatio> _CompanyFinancialRatioData;
-
         private GenericRepository<CompanyFinancialRatiosTTM> _CompanyFinancialRatiosTTMData;
+        //Stock Fundamentals Analysis
+        private GenericRepository<StockFInancialScores> _StockFInancialScoresData;
+        private GenericRepository<OwnersEarning> _OwnersEarningData;
+        private GenericRepository<CompanyEnterpriseValue> _CompanyEnterpriseValueData;
+        private GenericRepository<IncomeStatementsGrowth> _IncomeStatementsGrowthData;
+        private GenericRepository<BalanceSheetGrowth> _BalanceSheetGrowthData;
+
 
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
         }
-
+        //Stock Fundamentals
         public IGenericRepository<IncomeStatement> incomeStatementData => _incomeStatementData ??= new GenericRepository<IncomeStatement>(_context);
         public IGenericRepository<BalanceSheetStatement> balanceSheetStatementData => _balanceSheetStatementData ??= new GenericRepository<BalanceSheetStatement>(_context);
         public IGenericRepository<CashFLowStatement> CashFLowStatementData => _CashFlowStatementData ??= new GenericRepository<CashFLowStatement>(_context);
@@ -49,6 +46,12 @@ namespace P3.FundamentalData.API.Repository
         public IGenericRepository<CompanyNotesDue> CompanyNotesDueData => _CompanyNotesDueData ??= new GenericRepository<CompanyNotesDue>(_context);
         public IGenericRepository<CompanyFinancialRatio> CompanyFinancialRatioData => _CompanyFinancialRatioData ??= new GenericRepository<CompanyFinancialRatio>(_context);
         public IGenericRepository<CompanyFinancialRatiosTTM> CompanyFinancialRatiosTTMData => _CompanyFinancialRatiosTTMData ??= new GenericRepository<CompanyFinancialRatiosTTM>(_context);
+        //Stock Fundamentals Analysis
+        public IGenericRepository<StockFInancialScores> StockFInancialScoresData => _StockFInancialScoresData ??= new GenericRepository<StockFInancialScores>(_context);
+        public IGenericRepository<OwnersEarning> OwnersEarningData => _OwnersEarningData ??= new GenericRepository<OwnersEarning>(_context);
+        public IGenericRepository<CompanyEnterpriseValue> CompanyEnterpriseValueData => _CompanyEnterpriseValueData ??= new GenericRepository<CompanyEnterpriseValue>(_context);
+        public IGenericRepository<IncomeStatementsGrowth> IncomeStatementsGrowthData => _IncomeStatementsGrowthData ??= new GenericRepository<IncomeStatementsGrowth>(_context);
+        public IGenericRepository<BalanceSheetGrowth> BalanceSheetGrowthData => _BalanceSheetGrowthData ??= new GenericRepository<BalanceSheetGrowth>(_context);
 
         public void Dispose()
         {
