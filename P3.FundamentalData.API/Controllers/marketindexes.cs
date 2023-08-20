@@ -41,7 +41,7 @@ namespace P3.FundamentalData.API.Controllers
 					//var incomeStatementList = JsonConvert.DeserializeObject<List<IncomeStatement>>(reponseData);
 					//await _unitOfWork.incomeStatementData.CreateAsync(incomeStatementList);
 					//await _unitOfWork.SaveAsync();
-
+T t 
 					//string sqlQuery = "exec prcProcessIncomeStatement";
 					//await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
 				}
