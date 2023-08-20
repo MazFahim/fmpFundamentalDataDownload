@@ -87,7 +87,6 @@ namespace P3.FundamentalData.API.Controllers
 				});
 			}
 		}
-		
 
 		[HttpGet("companylistofSP500")]
 		public async Task<IActionResult> GetListOfSP500()
@@ -254,8 +253,5 @@ namespace P3.FundamentalData.API.Controllers
 				});
 			}
 		}
-
-
-
 	}
 }
