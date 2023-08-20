@@ -1,0 +1,62 @@
+﻿1. Database table name and dbcontext table name has tobe same.
+
+Checklist to insert data
+1. add the table into dbcontext file
+2. add IUnitOfWorks file.
+3. add unitOfWorks file.
+
+Deserialized response data row by row.
+
+JArray jsonArray = JArray.Parse(reponseData); // Parse the JSON array
+List<ModelName> majorIndexes = new List<ModelName>();
+
+foreach (JToken token in jsonArray)
+{
+	ModelName index = token.ToObject<ModelName>(); // Deserialize each JSON object
+	majorIndexes.Add(index);
+}
+
+
+// Common operatons
+
+public async Task<IActionResult> GetHisotricalSP500()
+		{
+			try
+			{
+				string apiKey=_apiConnection.GetApiKey();
+				HttpClient client = _apiConnection.CreateHttpClient();
+				var response = await client.GetAsync($"/api/v3/sp500_constituent?apikey={apiKey}");
+
+				if (response.IsSuccessStatusCode)
+				{
+					try
+					{
+						var responseData= await response.Content.ReadAsStringAsync();
+
+					}
+					catch(Exception ex)
+					{
+						return BadRequest(new {
+							code="400",
+							Message=ex.Message
+						});
+
+					}
+
+				}
+				else
+				{
+					return BadRequest(new { 
+						code="400",
+						Message= "An error occurred while processing your request."
+					});
+				}
+			}
+			catch
+			{
+				return BadRequest(new { 
+					code="400",
+					Message= "An error occurred while connecting FMP api.."
+				});
+			}
+		}
