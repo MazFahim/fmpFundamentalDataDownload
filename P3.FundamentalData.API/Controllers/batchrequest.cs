@@ -22,31 +22,38 @@ namespace P3.FundamentalData.API.Controllers
 			_apiConnection = apiConnection;
 		}
 
-		[HttpGet("batchdata")]
-		public async Task <IActionResult> GetBatchData()
+		[HttpGet("batchdata/{symbols}")]
+		public async Task <IActionResult> GetBatchData(string symbols)
 		{   ///https://financialmodelingprep.com/api/v3/quote/AAPL?apikey=2b2bbacbc149bcba58903f591ae3d3c8
-			var symbol = "AAPL,MSFT,AMZN,META,GOOG,SPY,QQQ,NVDA,TSLA,NFLX";
+			//var symbol = "AAPL,MSFT,AMZN,META,GOOG,SPY,QQQ,NVDA,TSLA,NFLX";
 			try
 			{
 				string apiKey = _apiConnection.GetApiKey();
 				HttpClient client = _apiConnection.CreateHttpClient();
-				var response = await client.GetAsync($"/api/v3/quote/{symbol}?apikey={apiKey}");
+				var response = await client.GetAsync($"/api/v3/quote/{symbols}?apikey={apiKey}");
 
 				if (response.IsSuccessStatusCode)
 				{
 					try
 					{
 						var responseData = await response.Content.ReadAsStringAsync();
-						//JArray jsonArray = JArray.Parse(responseData); // Parse the JSON array
-						//List<TempBulkData> bulkdataList = new List<TempBulkData>();
-						//foreach (JToken token in jsonArray)
-						//{
-						//	TempBulkData index = token.ToObject<TempBulkData>(); // Deserialize each JSON object
-						//	bulkdataList.Add(index);
-						//}
-						var bulkdataList= JsonConvert.DeserializeObject<List<TempBulkData>>(responseData);
+						var bulkdataList= JsonConvert.DeserializeObject<List<Temp_BulkData>>(responseData);
+						if (bulkdataList.Count == 0)
+						{
+							return Ok(new { 
+							code="200",
+							Message="Response data is empty."
+							});
+						}
+						await _unitOfWork.temp_BulkData.CreateAsync(bulkdataList);
+						await _unitOfWork.SaveAsync();
+						await _unitOfWork.temp_BulkData.ExecuteSQLProcedureAsync("EXEC prcProcessBulkData");
 						Console.WriteLine(bulkdataList);
-						return Ok(responseData);
+						return Ok(new
+						{
+							code="200",
+							Message="Data inserted successfully."
+						});
 
 					}
 					catch (Exception ex)

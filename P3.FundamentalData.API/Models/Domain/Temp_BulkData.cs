@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
 using P3.FundamentalData.API.Services;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace P3.FundamentalData.API.Models.Domain
 {
-	public class TempBulkData:TempBase
+	public class Temp_BulkData:TempBase
 	{
+		[Column("SymName")]
 		public string Symbol { get; set; }
 		public string? Name { get; set; }
 		public decimal? Price { get; set; }
