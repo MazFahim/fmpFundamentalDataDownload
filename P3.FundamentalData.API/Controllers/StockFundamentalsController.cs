@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using P3.FundamentalData.API.Models;
+using P3.FundamentalData.API.Models.Domain;
 using P3.FundamentalData.API.Repository;
 using P3.FundamentalData.API.Repository.IRepository;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -456,36 +457,7 @@ namespace P3.FundamentalData.API.Controllers
             }
             return NotFound();
         }
-        //annual usa Stock data
-        //no usa exchange in the list
-        //[HttpGet("financialstatment/annually-fullfinancialstatement-AsReported/{symbol}")]
-        //public async Task<IActionResult> GetAnnualFullFinancialStatementAsReportedFromFMP(string symbol)
-        //{
-        //    var apiKey = _configuration["APIInfo:Key"].ToString();
-        //    var client = _httpClientFactory.CreateClient("baseurl");
-        //    var response = await client.GetAsync($"financial-statement-full-as-reported/{symbol}?apikey={apiKey}");
 
-        //    if (response.IsSuccessStatusCode)
-        //    {
-        //        try
-        //        {
-        //            var reponseData = await response.Content.ReadAsStringAsync();
-        //            
-        //            var fullFinancilalStatementAsReportedList = JsonConvert.DeserializeObject<List<FullFinancilalStatementAsReported>>(reponseData);
-
-        //            await _unitOfWork.FullFinancilalStatementAsReportedData.CreateAsync(fullFinancilalStatementAsReportedList);
-        //            await _unitOfWork.SaveAsync();
-        //            string sqlQuery = "exec prcProcessFullFinancialStatementAsReported";
-        //            await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            return BadRequest();
-        //        }
-        //        return Ok();
-        //    }
-        //    return NotFound();
-        //}
         //Shares Float data
         [HttpGet("financialstatment/shares-float/{symbol}")]
         public async Task<IActionResult> GetSharesFloatFromFMP(string symbol)
@@ -493,7 +465,6 @@ namespace P3.FundamentalData.API.Controllers
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
             var response = await client.GetAsync($"v4/shares_float?{symbol}&apikey={apiKey}");
-
             if (response.IsSuccessStatusCode)
             {
                 try
@@ -544,5 +515,37 @@ namespace P3.FundamentalData.API.Controllers
             }
             return NotFound();
         }
+        
+      [HttpGet("financialstatment/secfillings/{symbol}")]
+        public async Task GetSecFillings(string symbol)
+        {
+			var apiKey = _configuration["APIInfo:Key"].ToString();
+			var client = _httpClientFactory.CreateClient("baseurl");
+            var count = 0;
+			// sec_filings / AAPL ? page = 25 & apikey = 2b2bbacbc149bcba58903f591ae3d3c8
+			var response = await client.GetAsync($"sec_filings/{symbol.ToUpper()}?page={count}&apikey={apiKey}");
+
+			    var reponseData = await response.Content.ReadAsStringAsync();
+				var sec_fills = JsonConvert.DeserializeObject<List<temp_secfilings>>(reponseData);
+                var sec_fills_list= new List<temp_secfilings>();
+
+				while (sec_fills.Count != 0)
+                {
+					count++;
+                    sec_fills_list.AddRange(sec_fills);
+					response = await client.GetAsync($"sec_filings/{symbol.ToUpper()}?page={count}&apikey={apiKey}");
+					reponseData = await response.Content.ReadAsStringAsync();
+					sec_fills = JsonConvert.DeserializeObject<List<temp_secfilings>>(reponseData);
+
+				}
+                await _unitOfWork.Temp_SecFilings.CreateAsync(sec_fills_list);
+                await _unitOfWork.SaveAsync();
+                Console.WriteLine(sec_fills);
+
+			}
+
+
+		}
+
     }
 }
