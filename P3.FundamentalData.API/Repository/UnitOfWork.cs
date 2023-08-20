@@ -11,14 +11,35 @@ namespace P3.FundamentalData.API.Repository
 
         private GenericRepository<IncomeStatement> _incomeStatementData;
         private GenericRepository<BalanceSheetStatement> _balanceSheetStatementData;
+
+        private GenericRepository<CashFLowStatement> _CashFlowStatementData;
+
+        private GenericRepository<IncomeStatementAsReported> _IncomeStatementAsReportedData;
+
+        private GenericRepository<BalanceSheetStatementAsReported> _BalanceSheetAsReportedData;
+
+        private GenericRepository<CashFlowStatementAsReported> _CashFlowStatementAsReportedData;
+
+        private GenericRepository<FullFinancilalStatementAsReported> _FullFinancilalStatementAsReportedData;
+
+        private GenericRepository<InternationalFilings> _InternationalFilingsData;
+
+        private GenericRepository<SharesFloat> _SharesFloatData;
+        
+        private GenericRepository<CompanyNotesDue> _CompanyNotesDueData;
+
+        private GenericRepository<CompanyFinancialRatio> _CompanyFinancialRatioData;
+
+        private GenericRepository<CompanyFinancialRatiosTTM> _CompanyFinancialRatiosTTMData;
+
         private GenericRepository<temp_secfilings> _temp_secfilings;
-		private GenericRepository<CashFLowStatement> _CashFlowStatementData;
-		private GenericRepository<IncomeStatementAsReported> _IncomeStatementAsReportedData;
-		private GenericRepository<BalanceSheetStatementAsReported> _BalanceSheetAsReportedData;
-		private GenericRepository<CashFlowStatementAsReported> _CashFlowStatementAsReportedData;
-		private GenericRepository<FullFinancilalStatementAsReported> _FullFinancilalStatementAsReportedData;
-		private GenericRepository<InternationalFilings> _InternationalFilingsData;
-		public UnitOfWork(ApplicationDbContext context)
+		    private GenericRepository<CashFLowStatement> _CashFlowStatementData;
+		    private GenericRepository<IncomeStatementAsReported> _IncomeStatementAsReportedData;
+		    private GenericRepository<BalanceSheetStatementAsReported> _BalanceSheetAsReportedData;
+        private GenericRepository<CashFlowStatementAsReported> _CashFlowStatementAsReportedData;
+        private GenericRepository<FullFinancilalStatementAsReported> _FullFinancilalStatementAsReportedData;
+        private GenericRepository<InternationalFilings> _InternationalFilingsData;
+        public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -33,6 +54,10 @@ namespace P3.FundamentalData.API.Repository
         public IGenericRepository<CashFlowStatementAsReported> CashFlowStatementAsReportedData => _CashFlowStatementAsReportedData ??= new GenericRepository<CashFlowStatementAsReported>(_context);
         public IGenericRepository<FullFinancilalStatementAsReported> FullFinancilalStatementAsReportedData => _FullFinancilalStatementAsReportedData ??= new GenericRepository<FullFinancilalStatementAsReported>(_context);
         public IGenericRepository<InternationalFilings> InternationalFilingsData => _InternationalFilingsData ??= new GenericRepository<InternationalFilings>(_context);
+        public IGenericRepository<SharesFloat> SharesFloatData => _SharesFloatData ??= new GenericRepository<SharesFloat>(_context);
+        public IGenericRepository<CompanyNotesDue> CompanyNotesDueData => _CompanyNotesDueData ??= new GenericRepository<CompanyNotesDue>(_context);
+        public IGenericRepository<CompanyFinancialRatio> CompanyFinancialRatioData => _CompanyFinancialRatioData ??= new GenericRepository<CompanyFinancialRatio>(_context);
+        public IGenericRepository<CompanyFinancialRatiosTTM> CompanyFinancialRatiosTTMData => _CompanyFinancialRatiosTTMData ??= new GenericRepository<CompanyFinancialRatiosTTM>(_context);
 
 
 		public void Dispose()

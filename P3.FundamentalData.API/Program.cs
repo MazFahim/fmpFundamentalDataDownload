@@ -30,6 +30,7 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddHttpClient("baseurl", client =>
 {
+
     client.BaseAddress = new Uri("https://financialmodelingprep.com");
 });
 var app = builder.Build();

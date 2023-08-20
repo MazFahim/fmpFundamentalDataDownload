@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using P3.FundamentalData.API.Models;
 using P3.FundamentalData.API.Models.Domain;
@@ -29,7 +30,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"income-statement/{symbol}?limit=120&apikey={apiKey}");
+            var response = await client.GetAsync($"v3/income-statement/{symbol}?limit=120&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -61,7 +62,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"income-statement/{symbol}?period=quarter&limit=400&apikey={apiKey}");
+            var response = await client.GetAsync($"v3/income-statement/{symbol}?period=quarter&limit=400&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -100,7 +101,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"balance-sheet-statement/{symbol}?limit=120&apikey={apiKey}");
+            var response = await client.GetAsync($"v3/balance-sheet-statement/{symbol}?limit=120&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -132,7 +133,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"balance-sheet-statement/{symbol}?period=quarter&limit=400&apikey={apiKey}");
+            var response = await client.GetAsync($"v3/balance-sheet-statement/{symbol}?period=quarter&limit=400&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -170,7 +171,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"cash-flow-statement/{symbol}?limit=120&apikey={apiKey}");
+            var response = await client.GetAsync($"v3/cash-flow-statement/{symbol}?limit=120&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -202,7 +203,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"cash-flow-statement/{symbol}?period=quarter&limit=400&apikey={apiKey}");
+            var response = await client.GetAsync($"v3/cash-flow-statement/{symbol}?period=quarter&limit=400&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -240,7 +241,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"income-statement-as-reported/{symbol}?limit=10&apikey={apiKey}");
+            var response = await client.GetAsync($"v3/income-statement-as-reported/{symbol}?limit=10&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -272,7 +273,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"income-statement-as-reported/{symbol}?period=quarter&limit=50&apikey={apiKey}");
+            var response = await client.GetAsync($"v3/income-statement-as-reported/{symbol}?period=quarter&limit=50&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -304,7 +305,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"balance-sheet-statement-as-reported/{symbol}?limit=10&apikey={apiKey}");
+            var response = await client.GetAsync($"v3/balance-sheet-statement-as-reported/{symbol}?limit=10&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -336,7 +337,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"balance-sheet-statement-as-reported/{symbol}?period=quarter&limit=50&apikey={apiKey}");
+            var response = await client.GetAsync($"v3/balance-sheet-statement-as-reported/{symbol}?period=quarter&limit=50&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -374,7 +375,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"cash-flow-statement-as-reported/{symbol}?limit=10&apikey={apiKey}");
+            var response = await client.GetAsync($"v3/cash-flow-statement-as-reported/{symbol}?limit=10&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -406,7 +407,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"cash-flow-statement-as-reported/{symbol}?period=quarter&limit=50&apikey={apiKey}");
+            var response = await client.GetAsync($"v3/cash-flow-statement-as-reported/{symbol}?period=quarter&limit=50&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -444,7 +445,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"financial-statement-full-as-reported/{symbol}?apikey={apiKey}");
+            var response = await client.GetAsync($"v3/financial-statement-full-as-reported/{symbol}?apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -476,14 +477,14 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"financial-statement-full-as-reported/{symbol}?period=quarter&apikey={apiKey}");
+            var response = await client.GetAsync($"v3/financial-statement-full-as-reported/{symbol}?period=quarter&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
                 try
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
-                    if (reponseData == null)
+                    if (reponseData.IsNullOrEmpty())
                     {
                         return Ok("FMP didn't provide any data for this API");
                     }
@@ -508,8 +509,173 @@ namespace P3.FundamentalData.API.Controllers
             }
             return NotFound();
         }
+        //Shares Float data
+        [HttpGet("financialstatment/shares-float/{symbol}")]
+        public async Task<IActionResult> GetSharesFloatFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"v4/shares_float?{symbol}&apikey={apiKey}");
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var sharesFloatList = JsonConvert.DeserializeObject<List<SharesFloat>>(reponseData);
 
-        [HttpGet("financialstatment/secfillings/{symbol}")]
+                    await _unitOfWork.SharesFloatData.CreateAsync(sharesFloatList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessSharesFloat";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Company Notes Due data
+        [HttpGet("financialstatment/company-notes-due/{symbol}")]
+        public async Task<IActionResult> GetCompanyNotesDueFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"v4/company-notes?{symbol}&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var companyNotesDueList = JsonConvert.DeserializeObject<List<CompanyNotesDue>>(reponseData);
+
+                    await _unitOfWork.CompanyNotesDueData.CreateAsync(companyNotesDueList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCompanyNotesDue";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Annul Company Financial Ratio Data
+        [HttpGet("financialstatment/annual-company-financial-ratio/{symbol}")]
+        public async Task<IActionResult> GetAnnualCompanyFinancialRatioFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"v3/ratios/{symbol}?limit=40&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var companyFinancialRatioList = JsonConvert.DeserializeObject<List<CompanyFinancialRatio>>(reponseData);
+
+                    await _unitOfWork.CompanyFinancialRatioData.CreateAsync(companyFinancialRatioList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCompanyFinancialRatio";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Quarterly Company Financial Ratio Data
+        [HttpGet("financialstatment/quarter-company-financial-ratio/{symbol}")]
+        public async Task<IActionResult> GetQuarterCompanyFinancialRatioFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"v3/ratios/{symbol}?period=quarter&limit=140&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var companyFinancialRatioList = JsonConvert.DeserializeObject<List<CompanyFinancialRatio>>(reponseData);
+                    foreach (CompanyFinancialRatio item in companyFinancialRatioList)
+                    {
+                        if (item.period == "FY")
+                        {
+                            item.period = "Q4";
+                        }
+                    }
+                    await _unitOfWork.CompanyFinancialRatioData.CreateAsync(companyFinancialRatioList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCompanyFinancialRatio";
+                    await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Company Financial Ratio TTM Data
+        [HttpGet("financialstatment/company-financial-ratio-ttm/{symbol}")]
+        public async Task<IActionResult> GetCompanyFinancialRatioTTMFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"v3/ratios-ttm/{symbol}?apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+                    if (reponseData == null)
+                    {
+                        return Ok("FMP didn't provide any data for this API");
+                    }
+                    var companyFinancialRatioTTMList = JsonConvert.DeserializeObject<List<CompanyFinancialRatiosTTM>>(reponseData);
+
+                    await _unitOfWork.CompanyFinancialRatiosTTMData.CreateAsync(companyFinancialRatioTTMList);
+                    await _unitOfWork.SaveAsync();
+                    //string sqlQuery = "exec prcProcessCompanyFinancialRatio";
+                    //await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        
+      [HttpGet("financialstatment/secfillings/{symbol}")]
         public async Task GetSecFillings(string symbol)
         {
 			var apiKey = _configuration["APIInfo:Key"].ToString();
@@ -517,8 +683,7 @@ namespace P3.FundamentalData.API.Controllers
             var count = 0;
 			// sec_filings / AAPL ? page = 25 & apikey = 2b2bbacbc149bcba58903f591ae3d3c8
 			var response = await client.GetAsync($"sec_filings/{symbol.ToUpper()}?page={count}&apikey={apiKey}");
-            if (response.IsSuccessStatusCode)
-            {
+
 			    var reponseData = await response.Content.ReadAsStringAsync();
 				var sec_fills = JsonConvert.DeserializeObject<List<temp_secfilings>>(reponseData);
                 var sec_fills_list= new List<temp_secfilings>();
@@ -540,5 +705,6 @@ namespace P3.FundamentalData.API.Controllers
 
 
 		}
+
     }
 }
