@@ -14,6 +14,11 @@ namespace P3.FundamentalData.API.Repository.IRepository
         IGenericRepository<CashFlowStatementAsReported> CashFlowStatementAsReportedData { get; }
         IGenericRepository<FullFinancilalStatementAsReported> FullFinancilalStatementAsReportedData { get; }
         IGenericRepository<InternationalFilings> InternationalFilingsData { get; }
+        
+        // Major Indexes tables
+        IGenericRepository<MajorIndexes> majorIndexesData { get; }
+        IGenericRepository<CompanyListSP500> temp_ListSandP { get; }
+        IGenericRepository<TempHistoricalSP500> temp_HistoricalSP500 { get; }
         Task SaveAsync();
     }
 }

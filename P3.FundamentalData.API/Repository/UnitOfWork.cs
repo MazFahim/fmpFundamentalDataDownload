@@ -18,6 +18,9 @@ namespace P3.FundamentalData.API.Repository
 		private GenericRepository<CashFlowStatementAsReported> _CashFlowStatementAsReportedData;
 		private GenericRepository<FullFinancilalStatementAsReported> _FullFinancilalStatementAsReportedData;
 		private GenericRepository<InternationalFilings> _InternationalFilingsData;
+        private GenericRepository<MajorIndexes> _majorIndexes;
+        private GenericRepository<CompanyListSP500> _listSandP;
+        private GenericRepository<TempHistoricalSP500> _tempHistoricalSP500;
 		public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
@@ -34,7 +37,9 @@ namespace P3.FundamentalData.API.Repository
         public IGenericRepository<FullFinancilalStatementAsReported> FullFinancilalStatementAsReportedData => _FullFinancilalStatementAsReportedData ??= new GenericRepository<FullFinancilalStatementAsReported>(_context);
         public IGenericRepository<InternationalFilings> InternationalFilingsData => _InternationalFilingsData ??= new GenericRepository<InternationalFilings>(_context);
 
-
+        public IGenericRepository<MajorIndexes> majorIndexesData => _majorIndexes ??= new GenericRepository<MajorIndexes>(_context);
+        public IGenericRepository<CompanyListSP500> temp_ListSandP => _listSandP ??= new GenericRepository<CompanyListSP500>(_context);
+        public IGenericRepository<TempHistoricalSP500> temp_HistoricalSP500 => _tempHistoricalSP500 ??= new GenericRepository<TempHistoricalSP500>(_context);
 		public void Dispose()
         {
             Dispose(true);
