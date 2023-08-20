@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using P3.FundamentalData.API.Data;
 using P3.FundamentalData.API.Repository.IRepository;
 using P3.FundamentalData.API.Repository;
+using P3.FundamentalData.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +34,8 @@ builder.Services.AddHttpClient("baseurl", client =>
 
     client.BaseAddress = new Uri("https://financialmodelingprep.com");
 });
+
+builder.Services.AddSingleton<ApiConnection>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -31,13 +31,23 @@ namespace P3.FundamentalData.API.Repository
 
 
         private GenericRepository<temp_secfilings> _temp_secfilings;
-		    private GenericRepository<CashFLowStatement> _CashFlowStatementData;
-		    private GenericRepository<IncomeStatementAsReported> _IncomeStatementAsReportedData;
-		    private GenericRepository<BalanceSheetStatementAsReported> _BalanceSheetAsReportedData;
+		private GenericRepository<CashFLowStatement> _CashFlowStatementData;
+		private GenericRepository<IncomeStatementAsReported> _IncomeStatementAsReportedData;
+		private GenericRepository<BalanceSheetStatementAsReported> _BalanceSheetAsReportedData;
         private GenericRepository<CashFlowStatementAsReported> _CashFlowStatementAsReportedData;
         private GenericRepository<FullFinancilalStatementAsReported> _FullFinancilalStatementAsReportedData;
         private GenericRepository<InternationalFilings> _InternationalFilingsData;
-        public UnitOfWork(ApplicationDbContext context)
+
+		private GenericRepository<CashFLowStatement> _CashFlowStatementData;
+		private GenericRepository<IncomeStatementAsReported> _IncomeStatementAsReportedData;
+		private GenericRepository<BalanceSheetStatementAsReported> _BalanceSheetAsReportedData;
+		private GenericRepository<CashFlowStatementAsReported> _CashFlowStatementAsReportedData;
+		private GenericRepository<FullFinancilalStatementAsReported> _FullFinancilalStatementAsReportedData;
+		private GenericRepository<InternationalFilings> _InternationalFilingsData;
+        private GenericRepository<MajorIndexes> _majorIndexes;
+        private GenericRepository<CompanyListSP500> _listSandP;
+        private GenericRepository<TempHistoricalSP500> _tempHistoricalSP500;
+		public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -63,7 +73,9 @@ namespace P3.FundamentalData.API.Repository
         public IGenericRepository<IncomeStatementsGrowth> IncomeStatementsGrowthData => _IncomeStatementsGrowthData ??= new GenericRepository<IncomeStatementsGrowth>(_context);
         public IGenericRepository<BalanceSheetGrowth> BalanceSheetGrowthData => _BalanceSheetGrowthData ??= new GenericRepository<BalanceSheetGrowth>(_context);
 
-
+        public IGenericRepository<MajorIndexes> majorIndexesData => _majorIndexes ??= new GenericRepository<MajorIndexes>(_context);
+        public IGenericRepository<CompanyListSP500> temp_ListSandP => _listSandP ??= new GenericRepository<CompanyListSP500>(_context);
+        public IGenericRepository<TempHistoricalSP500> temp_HistoricalSP500 => _tempHistoricalSP500 ??= new GenericRepository<TempHistoricalSP500>(_context);
 		public void Dispose()
         {
             Dispose(true);

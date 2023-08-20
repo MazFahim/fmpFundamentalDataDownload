@@ -25,6 +25,7 @@ namespace P3.FundamentalData.API.Data
         public DbSet<CompanyNotesDue> Temp_CompanyNotesDue { get; set; }
         public DbSet<CompanyFinancialRatio> Temp_CompanyFinancialRatios { get; set; }
         public DbSet<CompanyFinancialRatiosTTM> Temp_CompanyFinancialRatiosTTM { get; set; }
+
         //Stock Fundamentals Analysis
         public DbSet<StockFInancialScores> Temp_StockFinancialScores { get; set; }
         public DbSet<OwnersEarning> Temp_OwnerEarnings{ get; set; }
@@ -32,8 +33,14 @@ namespace P3.FundamentalData.API.Data
         public DbSet<IncomeStatementsGrowth> Temp_IncomeStatementsGrowth { get; set; }
         public DbSet<BalanceSheetGrowth> Temp_BalanceSheetGrowth { get; set; }
 
-    }
+   
+
+        public DbSet<MajorIndexes> Temp_MajorIndexes { get; set; }
+        public DbSet<CompanyListSP500> Temp_CompanyListSP500 { get; set; }
+        public DbSet<TempHistoricalSP500> Temp_HistoricalSP500 { get; set; }
+
 	}
+       
+}
     
 
-}
