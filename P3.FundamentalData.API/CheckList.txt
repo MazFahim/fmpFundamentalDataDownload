@@ -19,26 +19,41 @@ foreach (JToken token in jsonArray)
 
 // Common operatons
 
-public async Task<IActionResult> GetHisotricalSP500()
+public async Task <IActionResult> GetSymbolsList()
 		{
+			//https://financialmodelingprep.com/api/v3/stock/list?apikey=2b2bbacbc149bcba58903f591ae3d3c8
 			try
 			{
-				string apiKey=_apiConnection.GetApiKey();
+				string apiKey = _apiConnection.GetApiKey();
 				HttpClient client = _apiConnection.CreateHttpClient();
-				var response = await client.GetAsync($"/api/v3/sp500_constituent?apikey={apiKey}");
+				var response = await client.GetAsync($"/api/v3/stock/list?apikey={apiKey}");
 
 				if (response.IsSuccessStatusCode)
 				{
 					try
 					{
-						var responseData= await response.Content.ReadAsStringAsync();
+						var responseData = await response.Content.ReadAsStringAsync();
+						var symbolsList= JsonConvert.DeserializeObject<List<Temp_StockList>>(responseData);
+						if (symbolsList.Count == 0)
+						{
+							return Ok(new{
+								code="200",
+								Message="Response data is null."
+							});
+						}
+						return Ok(new
+						{
+							code="200",
+							Message="Data Successfully inserted."
+						});
 
 					}
-					catch(Exception ex)
+					catch (Exception ex)
 					{
-						return BadRequest(new {
-							code="400",
-							Message=ex.Message
+						return BadRequest(new
+						{
+							code = "400",
+							Message = ex.Message
 						});
 
 					}
@@ -46,17 +61,19 @@ public async Task<IActionResult> GetHisotricalSP500()
 				}
 				else
 				{
-					return BadRequest(new { 
-						code="400",
-						Message= "An error occurred while processing your request."
+					return BadRequest(new
+					{
+						code = "400",
+						Message = "An error occurred while processing your request."
 					});
 				}
 			}
 			catch
 			{
-				return BadRequest(new { 
-					code="400",
-					Message= "An error occurred while connecting FMP api.."
+				return BadRequest(new
+				{
+					code = "400",
+					Message = "An error occurred while connecting FMP api."
 				});
 			}
 		}

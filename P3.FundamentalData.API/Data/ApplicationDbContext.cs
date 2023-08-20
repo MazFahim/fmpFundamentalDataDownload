@@ -44,6 +44,7 @@ namespace P3.FundamentalData.API.Data
         public DbSet<CompanyListSP500> Temp_CompanyListSP500 { get; set; }
         public DbSet<TempHistoricalSP500> Temp_HistoricalSP500 { get; set; }
         public DbSet<Temp_BulkData> Temp_BulkData { get; set; }
+        public DbSet<Temp_StockList>Temp_StockList { get; set; }
 	}
        
 }
