@@ -28,6 +28,8 @@ namespace P3.FundamentalData.API.Repository.IRepository
         IGenericRepository<IncomeStatementsGrowth> IncomeStatementsGrowthData { get; }
         IGenericRepository<BalanceSheetGrowth> BalanceSheetGrowthData { get; }
         IGenericRepository<CashFlowStatementsGrowth> CashFlowStatementsGrowthData { get; }
+        IGenericRepository<CompanyKeyMetricsTTM> CompanyKeyMetricsTTMData { get; }
+        IGenericRepository<CompanyKeyMetrics> CompanyKeyMetricsData { get; }
 
 
         // Major Indexes tables

@@ -333,7 +333,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"v3/cash-flow-statement-growth/{symbol}?limit=40&apikey={apiKey}");
+            var response = await client.GetAsync($"/api/v3/cash-flow-statement-growth/{symbol}?limit=40&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -353,6 +353,35 @@ namespace P3.FundamentalData.API.Controllers
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessBalanceSheetGrowth";
                     //await _unitOfWork.CashFlowStatementsGrowthData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Company Key Metrics TTM data
+        [HttpGet("key-metrics/company-ttm/{symbol}")]
+        public async Task<IActionResult> GetCompanyKeyMetricsTTMFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v3/key-metrics-ttm/{symbol}?limit=40&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var companyKeyMetricsTTMList = JsonConvert.DeserializeObject<List<CompanyKeyMetricsTTM>>(reponseData);
+                    
+                    await _unitOfWork.CompanyKeyMetricsTTMData.CreateAsync(companyKeyMetricsTTMList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessBalanceSheetGrowth";
+                    //await _unitOfWork.CompanyKeyMetricsTTMData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
