@@ -31,6 +31,7 @@ namespace P3.FundamentalData.API.Repository
         private GenericRepository<CashFlowStatementsGrowth> _CashFlowStatementsGrowthData;
         private GenericRepository<CompanyKeyMetricsTTM> _CompanyKeyMetricsTTMData;
         private GenericRepository<CompanyKeyMetrics> _CompanyKeyMetricsData;
+        private GenericRepository<CompanyFinancialStatementGrowth> _CompanyFinancialStatementGrowthData;
 
 
         private GenericRepository<temp_secfilings> _temp_secfilings;
@@ -66,6 +67,7 @@ namespace P3.FundamentalData.API.Repository
         public IGenericRepository<CashFlowStatementsGrowth> CashFlowStatementsGrowthData => _CashFlowStatementsGrowthData ??= new GenericRepository<CashFlowStatementsGrowth>(_context);
         public IGenericRepository<CompanyKeyMetricsTTM> CompanyKeyMetricsTTMData => _CompanyKeyMetricsTTMData ??= new GenericRepository<CompanyKeyMetricsTTM>(_context);
         public IGenericRepository<CompanyKeyMetrics> CompanyKeyMetricsData => _CompanyKeyMetricsData ??= new GenericRepository<CompanyKeyMetrics>(_context);
+        public IGenericRepository<CompanyFinancialStatementGrowth> CompanyFinancialStatementGrowthData => _CompanyFinancialStatementGrowthData ??= new GenericRepository<CompanyFinancialStatementGrowth>(_context);
 
         public IGenericRepository<MajorIndexes> majorIndexesData => _majorIndexes ??= new GenericRepository<MajorIndexes>(_context);
         public IGenericRepository<CompanyListSP500> temp_ListSandP => _listSandP ??= new GenericRepository<CompanyListSP500>(_context);

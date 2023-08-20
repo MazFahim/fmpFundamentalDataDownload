@@ -397,5 +397,145 @@ namespace P3.FundamentalData.API.Controllers
             }
             return NotFound();
         }
+        //Annual Company key metrics data
+        [HttpGet("key-metrics/annual-company/{symbol}")]
+        public async Task<IActionResult> GetAnnualCompanyKeyMetricsFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v3/key-metrics/{symbol}?limit=40&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var companyKeyMetricsList = JsonConvert.DeserializeObject<List<CompanyKeyMetrics>>(reponseData);
+                    foreach (CompanyKeyMetrics item in companyKeyMetricsList)
+                    {
+                        if (item.Symbol == null)
+                        {
+                            item.Symbol = symbol;
+                        }
+                    }
+                    await _unitOfWork.CompanyKeyMetricsData.CreateAsync(companyKeyMetricsList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCompanyKeyMetrics";
+                    await _unitOfWork.CompanyKeyMetricsTTMData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Quarter Company key metrics data
+        [HttpGet("key-metrics/quarter-company/{symbol}")]
+        public async Task<IActionResult> GetQuarterCompanyKeyMetricsFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v3/key-metrics/{symbol}?period=quarter&limit=130&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var companyKeyMetricsList = JsonConvert.DeserializeObject<List<CompanyKeyMetrics>>(reponseData);
+                    foreach (CompanyKeyMetrics item in companyKeyMetricsList)
+                    {
+                        if (item.Symbol == null)
+                        {
+                            item.Symbol = symbol;
+                        }
+                    }
+                    await _unitOfWork.CompanyKeyMetricsData.CreateAsync(companyKeyMetricsList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCompanyKeyMetrics";
+                    await _unitOfWork.CompanyKeyMetricsTTMData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Company Financial Growth data
+        [HttpGet("financial-growth/annual-company/{symbol}")]
+        public async Task<IActionResult> GetAnnualCompanyFinancialGrowthFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v3/financial-growth/{symbol}?limit=20&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var companyFinancialStatementGrowthList = JsonConvert.DeserializeObject<List<CompanyFinancialStatementGrowth>>(reponseData);
+                    //foreach (CompanyFinancialStatementGrowth item in companyFinancialStatementGrowthList)
+                    //{
+                    //    if (item.Symbol == null)
+                    //    {
+                    //        item.Symbol = symbol;
+                    //    }
+                    //}
+                    await _unitOfWork.CompanyFinancialStatementGrowthData.CreateAsync(companyFinancialStatementGrowthList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCompanyFinancialGrowth";
+                    await _unitOfWork.CompanyKeyMetricsTTMData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Company Financial Growth data
+        [HttpGet("financial-growth/quarter-company/{symbol}")]
+        public async Task<IActionResult> GetQuarterCompanyFinancialGrowthFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v3/financial-growth/{symbol}?period=quarter&limit=80&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var companyFinancialStatementGrowthList = JsonConvert.DeserializeObject<List<CompanyFinancialStatementGrowth>>(reponseData);
+                    foreach (CompanyFinancialStatementGrowth item in companyFinancialStatementGrowthList)
+                    {
+                        if (item.Period == "FY")
+                        {
+                            item.Period = "Q4";
+                        }
+                    }
+                    await _unitOfWork.CompanyFinancialStatementGrowthData.CreateAsync(companyFinancialStatementGrowthList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCompanyFinancialGrowth";
+                    await _unitOfWork.CompanyKeyMetricsTTMData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
     }
 }
