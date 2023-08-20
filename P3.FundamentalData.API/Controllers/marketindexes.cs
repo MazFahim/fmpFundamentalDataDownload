@@ -22,81 +22,71 @@ namespace P3.FundamentalData.API.Controllers
 		[HttpGet("majorindex")]
 		public async Task<IActionResult> GetIndexes()
 		{
-			//https://financialmodelingprep.com/api/v3/quotes/index?apikey=2b2bbacbc149bcba58903f591ae3d3c8try
-			try
-			{
-				var apiKey = _apiConnection.GetApiKey();
-				HttpClient client = _apiConnection.CreateHttpClient();
-				var response = await client.GetAsync($"/api/v3/quotes/index?apikey={apiKey}");
-				if (response.IsSuccessStatusCode)
-				{
-				try
-				{
-					var reponseData = await response.Content.ReadAsStringAsync();
-					var majorIndexes = JsonConvert.DeserializeObject<List<MajorIndexes>>(responseData);
+            //https://financialmodelingprep.com/api/v3/quotes/index?apikey=2b2bbacbc149bcba58903f591ae3d3c8try
+            try
+            {
+                var apiKey = _apiConnection.GetApiKey();
+                HttpClient client = _apiConnection.CreateHttpClient();
+                var response = await client.GetAsync($"/api/v3/quotes/index?apikey={apiKey}");
+                if (response.IsSuccessStatusCode)
+                {
+                    try
+                    {
+                        var responseData = await response.Content.ReadAsStringAsync();
+                        var majorIndexes = JsonConvert.DeserializeObject<List<MajorIndexes>>(responseData);
+                        if (majorIndexes.Count == 0)
+                        {
+                            return Ok(new
+                            {
+                                Code = "200",
+                                Message = "Response data is null."
+                            });
+                        }
+                        foreach (MajorIndexes index in majorIndexes)
+                        {
+                            index.dtDate = DateTimeOffset.FromUnixTimeSeconds((long)index.Timestamp).UtcDateTime;
 
-					if (reponseData == null)
-					{
-						return Ok("FMP didn't provide any data for this API");
-					}
-					if (majorIndexes.Count == 0)
-						{
-							return Ok(new
-							{
-								Code = "200",
-								Message = "Response data is null."
-							});
-						}
-					//var incomeStatementList = JsonConvert.DeserializeObject<List<IncomeStatement>>(reponseData);
-					//await _unitOfWork.incomeStatementData.CreateAsync(incomeStatementList);
-					//await _unitOfWork.SaveAsync();
+                        }
+                        await _unitOfWork.majorIndexesData.CreateAsync(majorIndexes);
+                        await _unitOfWork.SaveAsync();
+                        await _unitOfWork.majorIndexesData.ExecuteSQLProcedureAsync("EXEC prcProcessMajorIndexes");
+                        return Ok(new
+                        {
+                            Code = "200",
+                            Message = "Data Successfully Inserted."
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        return BadRequest(
+                            new
+                            {
+                                code = "400",
+                                Message = ex.Message
+                            });
+                    }
 
-					//string sqlQuery = "exec prcProcessIncomeStatement";
-					//await _unitOfWork.incomeStatementData.ExecuteSQLProcedureAsync(sqlQuery);
-					foreach (MajorIndexes index in majorIndexes)
-						{
-							index.dtDate = DateTimeOffset.FromUnixTimeSeconds((long)index.Timestamp).UtcDateTime;
+                }
+                else
+                {
+                    return BadRequest(
+                        new
+                        {
+                            code = "400",
+                            Message = "Can not connect with FMP API."
+                        });
+                }
 
-						}
-
-						await _unitOfWork.majorIndexesData.CreateAsync(majorIndexes);
-						await _unitOfWork.SaveAsync();
-						await _unitOfWork.majorIndexesData.ExecuteSQLProcedureAsync("EXEC prcProcessMajorIndexes");
-					return Ok(new
-					{
-						Code = "200",
-						Message = "Data Successfully Inserted."
-					});
-				}
-				catch (Exception ex){
-						return BadRequest(new
-						{
-							Code = "400",
-							Message = "An error occurred while processing your request, custom error."
-						});
-			
-					
-				}
-				else
-				{
-					return BadRequest(new
-					{
-						Code = "400",
-						Message = "An error occurred while processing your request, Data Processing and insert."
-					});
-				}
-
-			}
-			catch
-			{
-				return BadRequest(new
-				{
-					code = "400",
-					Message = "An error occurred while connecting api.."
-				});
-
-			}
-		}
+            }
+            catch
+            {
+                return BadRequest(new
+                {
+                    code = "400",
+                    Message = "An error occured to connect FMP API."
+                });
+            }
+        }
 
 		[HttpGet("companylistofSP500")]
 		public async Task<IActionResult> GetListOfSP500()
