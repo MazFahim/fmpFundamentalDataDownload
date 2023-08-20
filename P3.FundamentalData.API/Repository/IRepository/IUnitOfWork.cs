@@ -24,7 +24,11 @@ namespace P3.FundamentalData.API.Repository.IRepository
         IGenericRepository<MajorIndexes> majorIndexesData { get; }
         IGenericRepository<CompanyListSP500> temp_ListSandP { get; }
         IGenericRepository<TempHistoricalSP500> temp_HistoricalSP500 { get; }
+        // Bulk And Batch
         IGenericRepository<Temp_BulkData> temp_BulkData { get; }
+
+        //Stock List
+        IGenericRepository<Temp_StockList> temp_StockList { get; }
         Task SaveAsync();
     }
 }
