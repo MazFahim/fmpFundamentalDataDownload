@@ -43,7 +43,7 @@ namespace P3.FundamentalData.API.Models
         public float DividendYieldPercentageTTM { get; set; }
         public float PayoutRatioTTM { get; set; }
         public float SalesGeneralAndAdministrativeToRevenueTTM { get; set; }
-        public float ResearchAndDevelopmentToRevenueTTM { get; set; }
+        public float? ResearchAndDevelopmentToRevenueTTM { get; set; }
         public float IntangiblesToTotalAssetsTTM { get; set; }
         public float CapexToOperatingCashFlowTTM { get; set; }
         public float CapexToRevenueTTM { get; set; }

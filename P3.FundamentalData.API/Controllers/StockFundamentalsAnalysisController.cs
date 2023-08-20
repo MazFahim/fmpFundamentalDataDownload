@@ -25,7 +25,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"v3/ratios/{symbol}?limit=40&apikey={apiKey}");
+            var response = await client.GetAsync($"/api/v3/ratios/{symbol}?limit=40&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -54,7 +54,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"v3/ratios/{symbol}?period=quarter&limit=140&apikey={apiKey}");
+            var response = await client.GetAsync($"/api/v3/ratios/{symbol}?period=quarter&limit=140&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -88,7 +88,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"v3/ratios-ttm/{symbol}?apikey={apiKey}");
+            var response = await client.GetAsync($"/api/v3/ratios-ttm/{symbol}?apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -123,7 +123,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"v4/score?symbol={symbol}&apikey={apiKey}");
+            var response = await client.GetAsync($"/api/v4/score?symbol={symbol}&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -158,7 +158,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"v4/owner_earnings?symbol={symbol}&apikey={apiKey}");
+            var response = await client.GetAsync($"/api/v4/owner_earnings?symbol={symbol}&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -193,7 +193,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"v3/enterprise-values/{symbol}?limit=40&apikey={apiKey}");
+            var response = await client.GetAsync($"/api/v3/enterprise-values/{symbol}?limit=40&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -228,7 +228,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"v3/enterprise-values/{symbol}?period=quarter&limit=130&apikey={apiKey}");
+            var response = await client.GetAsync($"/api/v3/enterprise-values/{symbol}?period=quarter&limit=130&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -263,7 +263,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"v3/income-statement-growth/{symbol}?limit=40&apikey={apiKey}");
+            var response = await client.GetAsync($"/api/v3/income-statement-growth/{symbol}?limit=40&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -298,7 +298,7 @@ namespace P3.FundamentalData.API.Controllers
         {
             var apiKey = _configuration["APIInfo:Key"].ToString();
             var client = _httpClientFactory.CreateClient("baseurl");
-            var response = await client.GetAsync($"v3/balance-sheet-statement-growth/{symbol}?limit=40&apikey={apiKey}");
+            var response = await client.GetAsync($"/api/v3/balance-sheet-statement-growth/{symbol}?limit=40&apikey={apiKey}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -351,8 +351,8 @@ namespace P3.FundamentalData.API.Controllers
                     }
                     await _unitOfWork.CashFlowStatementsGrowthData.CreateAsync(cashFlowStatementsGrowthList);
                     await _unitOfWork.SaveAsync();
-                    string sqlQuery = "exec prcProcessBalanceSheetGrowth";
-                    //await _unitOfWork.CashFlowStatementsGrowthData.ExecuteSQLProcedureAsync(sqlQuery);
+                    string sqlQuery = "exec prcProcessCashFlowStatementGrowth";
+                    await _unitOfWork.CashFlowStatementsGrowthData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {
@@ -377,7 +377,13 @@ namespace P3.FundamentalData.API.Controllers
                     var reponseData = await response.Content.ReadAsStringAsync();
 
                     var companyKeyMetricsTTMList = JsonConvert.DeserializeObject<List<CompanyKeyMetricsTTM>>(reponseData);
-                    
+                    foreach (CompanyKeyMetricsTTM item in companyKeyMetricsTTMList)
+                    {
+                        if (item.Symbol == null)
+                        {
+                            item.Symbol = symbol;
+                        }
+                    }
                     await _unitOfWork.CompanyKeyMetricsTTMData.CreateAsync(companyKeyMetricsTTMList);
                     await _unitOfWork.SaveAsync();
                     string sqlQuery = "exec prcProcessBalanceSheetGrowth";
