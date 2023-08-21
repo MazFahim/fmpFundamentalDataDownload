@@ -29,6 +29,16 @@ namespace P3.FundamentalData.API.Repository.IRepository
 
         //Stock List
         IGenericRepository<Temp_StockList> temp_StockList { get; }
-        Task SaveAsync();
+        // Fund Holdings
+        IGenericRepository<Temp_EtfHolders> temp_EtfHolders { get; }
+        IGenericRepository<Temp_InstitutionalHoldersOfACompanay> temp_InstitutionalHoldersOfACompanay { get; }
+        IGenericRepository<Temp_MutualFundHoldersOfACompanay> temp_MutualFundHoldersOfACompanay { get; }
+        IGenericRepository<Temp_ETFSectorWeightings> temp_ETFSectorWeightings { get; }
+        IGenericRepository<Temp_ETFCountryWeightings> temp_ETFCountryWeightings { get; }
+        IGenericRepository<Temp_ETFStockExposureList> temp_ETFStockExposureList { get; }
+        //Economics
+        IGenericRepository<Temp_MarketRiskPremiumForEachCountry> temp_MarketRiskPremiumForEachCountry { get; }
+
+		Task SaveAsync();
     }
 }
