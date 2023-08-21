@@ -37,6 +37,7 @@ namespace P3.FundamentalData.API.Data
         public DbSet<CompanyKeyMetrics> Temp_CompanyKeyMetrics { get; set; }
         public DbSet<CompanyFinancialStatementGrowth> Temp_CompanyFinancialStatementGrowth { get; set; }
         public DbSet<HistoricalCompaniesRating> Temp_HistoricalCompaniesRating { get; set; }
+        public DbSet<CompaniesHistoricalDiscountedCashFlow> Temp_CompaniesHistoricalDiscountedCashFlow { get; set; }
 
    
 

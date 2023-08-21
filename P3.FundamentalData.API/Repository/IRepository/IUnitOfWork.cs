@@ -32,6 +32,7 @@ namespace P3.FundamentalData.API.Repository.IRepository
         IGenericRepository<CompanyKeyMetrics> CompanyKeyMetricsData { get; }
         IGenericRepository<CompanyFinancialStatementGrowth> CompanyFinancialStatementGrowthData { get; }
         IGenericRepository<HistoricalCompaniesRating> HistoricalCompaniesRatingData { get; }
+        IGenericRepository<CompaniesHistoricalDiscountedCashFlow> CompaniesHistoricalDiscountedCashFlowData { get; }
 
 
         // Major Indexes tables
