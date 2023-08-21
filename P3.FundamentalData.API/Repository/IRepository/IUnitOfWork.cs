@@ -41,6 +41,7 @@ namespace P3.FundamentalData.API.Repository.IRepository
         //Institutional Stock Ownership
         IGenericRepository<InstitutionalStockOwnership> InstitutionalStockOwnershipData { get; }
         IGenericRepository<StockOwnershipByHolders> StockOwnershipByHoldersData { get; }
+        IGenericRepository<InstitutionalHoldingsPortfolioPositionsSummary> InstitutionalHoldingsPortfolioPositionsSummaryData { get; }
 
 
         // Major Indexes tables

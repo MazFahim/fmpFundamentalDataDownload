@@ -44,6 +44,7 @@ namespace P3.FundamentalData.API.Data
         //Institutional Stock Ownership
         public DbSet<InstitutionalStockOwnership> Temp_InstitutionalStockOwnership { get; set; }
         public DbSet<StockOwnershipByHolders> Temp_StockOwnershipByHolders { get; set; }
+        public DbSet<InstitutionalHoldingsPortfolioPositionsSummary> Temp_InstitutionalHoldingsPortfolioPositionsSummary { get; set; }
 
    
 
