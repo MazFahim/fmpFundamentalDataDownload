@@ -50,6 +50,13 @@ namespace P3.FundamentalData.API.Repository
         private GenericRepository<TempHistoricalSP500> _tempHistoricalSP500;
         private GenericRepository<Temp_BulkData> _temp_bulkdata;
         private GenericRepository<Temp_StockList> _Temp_StockLists;
+        private GenericRepository<Temp_EtfHolders> _temp_etfHolders;
+        private GenericRepository<Temp_InstitutionalHoldersOfACompanay> _temp_InstitutionalHoldersOfACompanay;
+        private GenericRepository<Temp_MutualFundHoldersOfACompanay> _temp_MutualFundHoldersOfACompanay;
+        private GenericRepository<Temp_ETFSectorWeightings> _temp_ETFSectorWeightings;
+        private GenericRepository<Temp_ETFCountryWeightings> _temp_ETFCountryWeightings;
+        private GenericRepository<Temp_ETFStockExposureList> _temp_ETFStockExposureList;
+        private GenericRepository<Temp_MarketRiskPremiumForEachCountry> _temp_MarketRiskPremiumForEachCountry;
 		public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
@@ -96,6 +103,13 @@ namespace P3.FundamentalData.API.Repository
         public IGenericRepository<TempHistoricalSP500> temp_HistoricalSP500 => _tempHistoricalSP500 ??= new GenericRepository<TempHistoricalSP500>(_context);
 		public IGenericRepository<Temp_BulkData> temp_BulkData => _temp_bulkdata ??= new GenericRepository<Temp_BulkData>(_context);  
         public IGenericRepository<Temp_StockList> temp_StockList => _Temp_StockLists ??= new GenericRepository<Temp_StockList>(_context);  
+        public IGenericRepository<Temp_EtfHolders> temp_EtfHolders => _temp_etfHolders ??= new GenericRepository<Temp_EtfHolders>(_context);
+        public IGenericRepository<Temp_InstitutionalHoldersOfACompanay> temp_InstitutionalHoldersOfACompanay => _temp_InstitutionalHoldersOfACompanay ??= new GenericRepository<Temp_InstitutionalHoldersOfACompanay>(_context);
+        public IGenericRepository<Temp_MutualFundHoldersOfACompanay> temp_MutualFundHoldersOfACompanay => _temp_MutualFundHoldersOfACompanay ??= new GenericRepository<Temp_MutualFundHoldersOfACompanay>(_context);
+        public IGenericRepository<Temp_ETFSectorWeightings> temp_ETFSectorWeightings => _temp_ETFSectorWeightings ??= new GenericRepository<Temp_ETFSectorWeightings>(_context);
+        public IGenericRepository<Temp_ETFCountryWeightings> temp_ETFCountryWeightings => _temp_ETFCountryWeightings ??= new GenericRepository<Temp_ETFCountryWeightings>(_context);
+        public IGenericRepository<Temp_ETFStockExposureList> temp_ETFStockExposureList => _temp_ETFStockExposureList ??= new GenericRepository<Temp_ETFStockExposureList>(_context);
+        public IGenericRepository<Temp_MarketRiskPremiumForEachCountry> temp_MarketRiskPremiumForEachCountry => _temp_MarketRiskPremiumForEachCountry ??= new GenericRepository<Temp_MarketRiskPremiumForEachCountry>(_context);
 
 		public void Dispose()
         {

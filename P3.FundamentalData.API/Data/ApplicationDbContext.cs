@@ -52,6 +52,13 @@ namespace P3.FundamentalData.API.Data
         public DbSet<TempHistoricalSP500> Temp_HistoricalSP500 { get; set; }
         public DbSet<Temp_BulkData> Temp_BulkData { get; set; }
         public DbSet<Temp_StockList>Temp_StockList { get; set; }
+        public DbSet<Temp_EtfHolders> Temp_ETFHolders { get; set; }
+		public DbSet<Temp_InstitutionalHoldersOfACompanay> Temp_InstitutionalHoldersOfACompanay { get; set; }
+        public DbSet<Temp_MutualFundHoldersOfACompanay> Temp_MutualFundHoldersOfACompanay { get; set; }
+        public DbSet<Temp_ETFSectorWeightings> Temp_ETFSectorWeightings { get; set; }
+        public DbSet<Temp_ETFCountryWeightings> Temp_ETFCountryWeightings { get; set; }
+        public DbSet<Temp_ETFStockExposureList> Temp_ETFStockExposureList { get; set; }
+		public DbSet<Temp_MarketRiskPremiumForEachCountry> Temp_MarketRiskPremiumForEachCountry { get; set; }
 	}
        
 }
