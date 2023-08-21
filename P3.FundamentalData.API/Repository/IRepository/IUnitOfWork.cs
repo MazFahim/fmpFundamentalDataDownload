@@ -38,6 +38,10 @@ namespace P3.FundamentalData.API.Repository.IRepository
         IGenericRepository<AdvancedDiscountedCashFlowProjectionIncludingWACC> AdvancedDCFProjectionIncludingWACCData { get; }
         IGenericRepository<AdvancedLeveredDiscountedCashFlowProjectionIncludingWACC> AdvancedLeveredDCFProjectionIncludingWACCData { get; }
 
+        //Institutional Stock Ownership
+        IGenericRepository<InstitutionalStockOwnership> InstitutionalStockOwnershipData { get; }
+        IGenericRepository<StockOwnershipByHolders> StockOwnershipByHoldersData { get; }
+
 
         // Major Indexes tables
         IGenericRepository<MajorIndexes> majorIndexesData { get; }

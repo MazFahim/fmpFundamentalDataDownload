@@ -39,6 +39,9 @@ namespace P3.FundamentalData.API.Repository
         private GenericRepository<CompaniesDiscountedCashFlow> _CompaniesDiscountedCashFlowData;
         private GenericRepository<AdvancedDiscountedCashFlowProjectionIncludingWACC> _AdvancedDCFProjectionIncludingWACCData;
         private GenericRepository<AdvancedLeveredDiscountedCashFlowProjectionIncludingWACC> _AdvancedLeveredDCFProjectionIncludingWACCData;
+        //Institutional Stock Ownership
+        private GenericRepository<InstitutionalStockOwnership> _InstitutionalStockOwnershipData;
+        private GenericRepository<StockOwnershipByHolders> _StockOwnershipByHoldersData;
 
 
         private GenericRepository<temp_secfilings> _temp_secfilings;
@@ -82,6 +85,11 @@ namespace P3.FundamentalData.API.Repository
         public IGenericRepository<CompaniesDiscountedCashFlow> CompaniesDiscountedCashFlowData => _CompaniesDiscountedCashFlowData ??= new GenericRepository<CompaniesDiscountedCashFlow>(_context);
         public IGenericRepository<AdvancedDiscountedCashFlowProjectionIncludingWACC> AdvancedDCFProjectionIncludingWACCData => _AdvancedDCFProjectionIncludingWACCData ??= new GenericRepository<AdvancedDiscountedCashFlowProjectionIncludingWACC>(_context);
         public IGenericRepository<AdvancedLeveredDiscountedCashFlowProjectionIncludingWACC> AdvancedLeveredDCFProjectionIncludingWACCData => _AdvancedLeveredDCFProjectionIncludingWACCData ??= new GenericRepository<AdvancedLeveredDiscountedCashFlowProjectionIncludingWACC>(_context);
+
+        //Institutional Stock Ownership
+        public IGenericRepository<InstitutionalStockOwnership> InstitutionalStockOwnershipData => _InstitutionalStockOwnershipData ??= new GenericRepository<InstitutionalStockOwnership>(_context);
+        public IGenericRepository<StockOwnershipByHolders> StockOwnershipByHoldersData => _StockOwnershipByHoldersData ??= new GenericRepository<StockOwnershipByHolders>(_context);
+
 
         public IGenericRepository<MajorIndexes> majorIndexesData => _majorIndexes ??= new GenericRepository<MajorIndexes>(_context);
         public IGenericRepository<CompanyListSP500> temp_ListSandP => _listSandP ??= new GenericRepository<CompanyListSP500>(_context);

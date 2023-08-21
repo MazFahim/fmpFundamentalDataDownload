@@ -41,6 +41,9 @@ namespace P3.FundamentalData.API.Data
         public DbSet<CompaniesDiscountedCashFlow> Temp_CompaniesDiscountedCashFlow { get; set; }
         public DbSet<AdvancedDiscountedCashFlowProjectionIncludingWACC> Temp_AdvancedDiscountedCashFlowProjectionIncludingWACC { get; set; }
         public DbSet<AdvancedLeveredDiscountedCashFlowProjectionIncludingWACC> Temp_AdvancedLeveredDiscountedCashFlowProjectionIncludingWACC { get; set; }
+        //Institutional Stock Ownership
+        public DbSet<InstitutionalStockOwnership> Temp_InstitutionalStockOwnership { get; set; }
+        public DbSet<StockOwnershipByHolders> Temp_StockOwnershipByHolders { get; set; }
 
    
 
