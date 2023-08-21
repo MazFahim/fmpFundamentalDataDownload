@@ -17,7 +17,8 @@ namespace P3.FundamentalData.API.Models
         public string Period { get; set; }
         public decimal? Price { get; set; }
         public double? Dcf { get; set; }
-        public DateTime DtExecuted { get; set; }
-        public int Flag { get; set; }
+        [Column("dtExecuted", TypeName = "smalldatetime")]
+        public DateTime DtExecuted { get; set; } = DateTime.Now;
+        public int Flag { get; set; } = 0;
     }
 }

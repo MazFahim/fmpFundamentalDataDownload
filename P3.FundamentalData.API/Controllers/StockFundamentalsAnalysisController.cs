@@ -595,7 +595,110 @@ namespace P3.FundamentalData.API.Controllers
             }
             return NotFound();
         }
-        //Companies Historic Data
+        //Companies Annual Historic Data
+        [HttpGet("dcf/annual-companies-historical-dcf/{symbol}")]
+        public async Task<IActionResult> GetAnnualCompaniesHistoricalDCFFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v3/historical-discounted-cash-flow-statement/{symbol}?apikey={apiKey}");
 
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var companiesHistoricalDiscountedCashFlowList = JsonConvert.DeserializeObject<List<CompaniesHistoricalDiscountedCashFlow>>(reponseData);
+                    foreach (CompaniesHistoricalDiscountedCashFlow item in companiesHistoricalDiscountedCashFlowList)
+                    {
+                        if (item.Period == null)
+                        {
+                            item.Period = "FY";
+                        }
+                    }
+                    await _unitOfWork.CompaniesHistoricalDiscountedCashFlowData.CreateAsync(companiesHistoricalDiscountedCashFlowList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCompanyHistoricalDCF";
+                    await _unitOfWork.CompaniesHistoricalDiscountedCashFlowData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Quarterly Companies Historical DCF
+        [HttpGet("dcf/quarterly-companies-historical-dcf/{symbol}")]
+        public async Task<IActionResult> GetQuarterlyCompaniesHistoricalDCFFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v3/historical-discounted-cash-flow-statement/{symbol}?period=quarter&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var companiesHistoricalDiscountedCashFlowList = JsonConvert.DeserializeObject<List<CompaniesHistoricalDiscountedCashFlow>>(reponseData);
+                    foreach (CompaniesHistoricalDiscountedCashFlow item in companiesHistoricalDiscountedCashFlowList)
+                    {
+                        if (item.Period == null)
+                        {
+                            item.Period = "Q";
+                        }
+                    }
+                    await _unitOfWork.CompaniesHistoricalDiscountedCashFlowData.CreateAsync(companiesHistoricalDiscountedCashFlowList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCompanyHistoricalDCF";
+                    await _unitOfWork.CompaniesHistoricalDiscountedCashFlowData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Companies Daily DCF
+        [HttpGet("dcf/daily-companies-historical-dcf/{symbol}")]
+        public async Task<IActionResult> GetDailyCompaniesHistoricalDCFFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v3/historical-daily-discounted-cash-flow/{symbol}?period=quarter&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var companiesHistoricalDiscountedCashFlowList = JsonConvert.DeserializeObject<List<CompaniesHistoricalDiscountedCashFlow>>(reponseData);
+                    foreach (CompaniesHistoricalDiscountedCashFlow item in companiesHistoricalDiscountedCashFlowList)
+                    {
+                        if (item.Period == null)
+                        {
+                            item.Period = "Q";
+                        }
+                    }
+                    await _unitOfWork.CompaniesHistoricalDiscountedCashFlowData.CreateAsync(companiesHistoricalDiscountedCashFlowList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCompanyHistoricalDCF";
+                    await _unitOfWork.CompaniesHistoricalDiscountedCashFlowData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
     }
 }
