@@ -14,7 +14,6 @@ namespace P3.FundamentalData.API.Data
         public DbSet<IncomeStatement> Temp_IncomeStatement { get; set; }
         public DbSet<BalanceSheetStatement> Temp_BalanceSheetStatement { get; set; }
         public DbSet<temp_secfilings> Temp_SecFilings { get; set; }
-
         public DbSet<CashFLowStatement> Temp_CashFlowStatement { get; set; }
         public DbSet<IncomeStatementAsReported> Temp_IncomeStatementsAsReported { get; set; }
         public DbSet<BalanceSheetStatementAsReported> Temp_BalanceSheetStatementsAsReported { get; set; }
