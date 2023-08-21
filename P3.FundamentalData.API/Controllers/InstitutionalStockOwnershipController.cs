@@ -77,5 +77,34 @@ namespace P3.FundamentalData.API.Controllers
             }
             return NotFound();
         }
+        //Institutional Holdings Portfolio Positions Summary
+        [HttpGet("iso/institutional-holdings-portfolio-positions-summary/{symbol}")]
+        public async Task<IActionResult> GetInstitutionalHoldingsPortfolioPositionsSummaryFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v4/institutional-ownership/portfolio-holdings-summary?cik=0001067983&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var institutionalHoldingsPortfolioPositionsSummaryList = JsonConvert.DeserializeObject<List<InstitutionalHoldingsPortfolioPositionsSummary>>(reponseData);
+
+                    await _unitOfWork.InstitutionalHoldingsPortfolioPositionsSummaryData.CreateAsync(institutionalHoldingsPortfolioPositionsSummaryList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCompanyFinancialRatio";
+                    //await _unitOfWork.InstitutionalHoldingsPortfolioPositionsSummaryData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
     }
 }
