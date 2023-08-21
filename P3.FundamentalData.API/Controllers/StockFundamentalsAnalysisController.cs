@@ -679,18 +679,99 @@ namespace P3.FundamentalData.API.Controllers
                 {
                     var reponseData = await response.Content.ReadAsStringAsync();
 
-                    var companiesHistoricalDiscountedCashFlowList = JsonConvert.DeserializeObject<List<CompaniesHistoricalDiscountedCashFlow>>(reponseData);
-                    foreach (CompaniesHistoricalDiscountedCashFlow item in companiesHistoricalDiscountedCashFlowList)
-                    {
-                        if (item.Period == null)
-                        {
-                            item.Period = "Q";
-                        }
-                    }
-                    await _unitOfWork.CompaniesHistoricalDiscountedCashFlowData.CreateAsync(companiesHistoricalDiscountedCashFlowList);
+                    var dailyDCFList = JsonConvert.DeserializeObject<List<DailyDCF>>(reponseData);
+                    
+                    await _unitOfWork.DailyDCFData.CreateAsync(dailyDCFList);
                     await _unitOfWork.SaveAsync();
-                    string sqlQuery = "exec prcProcessCompanyHistoricalDCF";
-                    await _unitOfWork.CompaniesHistoricalDiscountedCashFlowData.ExecuteSQLProcedureAsync(sqlQuery);
+                    string sqlQuery = "exec prcProcessCompanyDailyDCF";
+                    await _unitOfWork.DailyDCFData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Companies Discounted Cash FLow
+        [HttpGet("dcf/companies-dcf/{symbol}")]
+        public async Task<IActionResult> GetCompaniesDCFFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v3/discounted-cash-flow/{symbol}?apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var companiesDiscountedCashFlowList = JsonConvert.DeserializeObject<List<CompaniesDiscountedCashFlow>>(reponseData);
+
+                    await _unitOfWork.CompaniesDiscountedCashFlowData.CreateAsync(companiesDiscountedCashFlowList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessCompanyDCF";
+                    await _unitOfWork.CompaniesDiscountedCashFlowData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Advance DCF projection including WACC
+        [HttpGet("dcf/advance-dcf-projection-including-wacc/{symbol}")]
+        public async Task<IActionResult> GetAdvanceDCFprojectionIncludingWACCFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v4/advanced_discounted_cash_flow?symbol={symbol}&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var advancedDCFProjectionIncludingWACCDataList = JsonConvert.DeserializeObject<List<AdvancedDiscountedCashFlowProjectionIncludingWACC>>(reponseData);
+
+                    await _unitOfWork.AdvancedDCFProjectionIncludingWACCData.CreateAsync(advancedDCFProjectionIncludingWACCDataList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessAdvanceDCFProjectionIncludingWACC";
+                    await _unitOfWork.AdvancedDCFProjectionIncludingWACCData.ExecuteSQLProcedureAsync(sqlQuery);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest();
+                }
+                return Ok();
+            }
+            return NotFound();
+        }
+        //Advance Levered DCF projection including WACC
+        [HttpGet("dcf/advance-levered-dcf-projection-including-wacc/{symbol}")]
+        public async Task<IActionResult> GetAdvanceLeveredDCFprojectionIncludingWACCFromFMP(string symbol)
+        {
+            var apiKey = _configuration["APIInfo:Key"].ToString();
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/v4/advanced_levered_discounted_cash_flow?symbol={symbol}&apikey={apiKey}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                try
+                {
+                    var reponseData = await response.Content.ReadAsStringAsync();
+
+                    var advancedLeveredDCFProjectionIncludingWACCDataList = JsonConvert.DeserializeObject<List<AdvancedLeveredDiscountedCashFlowProjectionIncludingWACC>>(reponseData);
+
+                    await _unitOfWork.AdvancedLeveredDCFProjectionIncludingWACCData.CreateAsync(advancedLeveredDCFProjectionIncludingWACCDataList);
+                    await _unitOfWork.SaveAsync();
+                    string sqlQuery = "exec prcProcessAdvanceLeveredDCFProjectionIncludingWACC";
+                    await _unitOfWork.AdvancedLeveredDCFProjectionIncludingWACCData.ExecuteSQLProcedureAsync(sqlQuery);
                 }
                 catch (Exception ex)
                 {

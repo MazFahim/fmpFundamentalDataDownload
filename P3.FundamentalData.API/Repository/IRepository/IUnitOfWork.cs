@@ -33,6 +33,10 @@ namespace P3.FundamentalData.API.Repository.IRepository
         IGenericRepository<CompanyFinancialStatementGrowth> CompanyFinancialStatementGrowthData { get; }
         IGenericRepository<HistoricalCompaniesRating> HistoricalCompaniesRatingData { get; }
         IGenericRepository<CompaniesHistoricalDiscountedCashFlow> CompaniesHistoricalDiscountedCashFlowData { get; }
+        IGenericRepository<DailyDCF> DailyDCFData { get; }
+        IGenericRepository<CompaniesDiscountedCashFlow> CompaniesDiscountedCashFlowData { get; }
+        IGenericRepository<AdvancedDiscountedCashFlowProjectionIncludingWACC> AdvancedDCFProjectionIncludingWACCData { get; }
+        IGenericRepository<AdvancedLeveredDiscountedCashFlowProjectionIncludingWACC> AdvancedLeveredDCFProjectionIncludingWACCData { get; }
 
 
         // Major Indexes tables
