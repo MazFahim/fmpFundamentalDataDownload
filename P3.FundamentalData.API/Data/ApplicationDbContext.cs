@@ -46,7 +46,12 @@ namespace P3.FundamentalData.API.Data
         public DbSet<StockOwnershipByHolders> Temp_StockOwnershipByHolders { get; set; }
         public DbSet<InstitutionalHoldingsPortfolioPositionsSummary> Temp_InstitutionalHoldingsPortfolioPositionsSummary { get; set; }
 
-   
+        //ESG Score
+        public DbSet<ESG_Score> Temp_EsgScoreForSymbol { get; set; }
+        public DbSet<ESG_RiskRating> Temp_CompanyESGRiskRatings { get; set; }
+        public DbSet<ESGBenchmarkingBySectorAndYear> Temp_ESGBenchmarkingBySectorAndYear { get; set; }
+
+
 
         public DbSet<MajorIndexes> Temp_MajorIndexes { get; set; }
         public DbSet<CompanyListSP500> Temp_CompanyListSP500 { get; set; }
