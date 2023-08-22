@@ -47,6 +47,11 @@ namespace P3.FundamentalData.API.Repository.IRepository
         IGenericRepository<ESG_Score> ESG_ScoreData { get; }
         IGenericRepository<ESG_RiskRating> ESG_RiskRatingData { get; }
         IGenericRepository<ESGBenchmarkingBySectorAndYear> ESGBenchmarkingBySectorAndYearData { get; }
+        //Price Target
+        IGenericRepository<PriceTargetsSummaryForSymbol> PriceTargetsSummaryForSymbolData { get; }
+        //Stock Look Up Tool
+        IGenericRepository<StockScreener> StockScreenerData { get; }
+
 
 
         // Major Indexes tables

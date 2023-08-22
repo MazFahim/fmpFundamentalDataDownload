@@ -51,6 +51,12 @@ namespace P3.FundamentalData.API.Data
         public DbSet<ESG_RiskRating> Temp_CompanyESGRiskRatings { get; set; }
         public DbSet<ESGBenchmarkingBySectorAndYear> Temp_ESGBenchmarkingBySectorAndYear { get; set; }
 
+        //Price Target 
+        public DbSet<PriceTargetsSummaryForSymbol> Temp_PriceTargetsSummaryForSymbol { get; set; }
+
+        //Stock Look Up Tool
+        public DbSet<StockScreener> Temp_StockScreener { get; set; }
+
 
 
         public DbSet<MajorIndexes> Temp_MajorIndexes { get; set; }
