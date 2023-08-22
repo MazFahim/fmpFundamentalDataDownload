@@ -72,6 +72,18 @@ namespace P3.FundamentalData.API.Repository.IRepository
         IGenericRepository<Temp_ETFStockExposureList> temp_ETFStockExposureList { get; }
         //Economics
         IGenericRepository<Temp_MarketRiskPremiumForEachCountry> temp_MarketRiskPremiumForEachCountry { get; }
+        IGenericRepository<Temp_SenateTradesForSpecificSymbol> temp_SenateTradesForSpecificSymbol { get; }
+
+        //Insider Trading
+        IGenericRepository<tblInsiderTradingTransactionType> tblInsiderTradingTransactionType { get; }
+        IGenericRepository<Temp_InsiderTradingForASpecificSymbol> temp_InsiderTradingForASpecificSymbol { get; }
+
+        //Stock Statistics
+        IGenericRepository<Temp_StockGradeFromAnalysts> temp_StockGradeFromAnalysts { get; }
+        IGenericRepository<Temp_StockEarningsSurprisesForASymbol> temp_StockEarningsSurprisesForASymbol { get;}
+        IGenericRepository<Temp_StockAnalystEstimate> temp_StockAnalystEstimate { get; }
+        IGenericRepository<Temp_CompanyHistoricalMarketCapitalization> temp_CompanyHistoricalMarketCapitalization { get; }
+
 
 		Task SaveAsync();
     }
