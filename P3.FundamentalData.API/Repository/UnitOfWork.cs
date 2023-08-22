@@ -46,6 +46,16 @@ namespace P3.FundamentalData.API.Repository
         private GenericRepository<Temp_ETFCountryWeightings> _temp_ETFCountryWeightings;
         private GenericRepository<Temp_ETFStockExposureList> _temp_ETFStockExposureList;
         private GenericRepository<Temp_MarketRiskPremiumForEachCountry> _temp_MarketRiskPremiumForEachCountry;
+        private GenericRepository<Temp_SenateTradesForSpecificSymbol> _temp_SenateTradesForSpecificSymbol;
+        private GenericRepository<tblInsiderTradingTransactionType> _tblInsiderTradingTransactionType;
+        private GenericRepository<Temp_InsiderTradingForASpecificSymbol> _temp_InsiderTradingForASpecificSymbol;
+        private GenericRepository<Temp_StockGradeFromAnalysts> _temp_StockGradeFromAnalysts;
+		
+		private GenericRepository<Temp_StockEarningsSurprisesForASymbol> _temp_StockEarningsSurprisesForASymbol;
+		private GenericRepository<Temp_StockAnalystEstimate> _temp_StockAnalystEstimate;
+        private GenericRepository<Temp_CompanyHistoricalMarketCapitalization> _temp_CompanyHistoricalMarketCapitalization;
+
+
 		public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
@@ -78,6 +88,14 @@ namespace P3.FundamentalData.API.Repository
         public IGenericRepository<Temp_ETFCountryWeightings> temp_ETFCountryWeightings => _temp_ETFCountryWeightings ??= new GenericRepository<Temp_ETFCountryWeightings>(_context);
         public IGenericRepository<Temp_ETFStockExposureList> temp_ETFStockExposureList => _temp_ETFStockExposureList ??= new GenericRepository<Temp_ETFStockExposureList>(_context);
         public IGenericRepository<Temp_MarketRiskPremiumForEachCountry> temp_MarketRiskPremiumForEachCountry => _temp_MarketRiskPremiumForEachCountry ??= new GenericRepository<Temp_MarketRiskPremiumForEachCountry>(_context);
+        public IGenericRepository<Temp_SenateTradesForSpecificSymbol> temp_SenateTradesForSpecificSymbol => _temp_SenateTradesForSpecificSymbol ??= new GenericRepository<Temp_SenateTradesForSpecificSymbol>(_context);
+        public IGenericRepository<tblInsiderTradingTransactionType> tblInsiderTradingTransactionType => _tblInsiderTradingTransactionType ??= new GenericRepository<tblInsiderTradingTransactionType>(_context);
+        public IGenericRepository<Temp_InsiderTradingForASpecificSymbol> temp_InsiderTradingForASpecificSymbol => _temp_InsiderTradingForASpecificSymbol ??= new GenericRepository<Temp_InsiderTradingForASpecificSymbol>(_context);
+        public IGenericRepository<Temp_StockGradeFromAnalysts> temp_StockGradeFromAnalysts => _temp_StockGradeFromAnalysts ??= new GenericRepository<Temp_StockGradeFromAnalysts>(_context);
+        public IGenericRepository<Temp_StockEarningsSurprisesForASymbol> temp_StockEarningsSurprisesForASymbol => _temp_StockEarningsSurprisesForASymbol ??= new GenericRepository<Temp_StockEarningsSurprisesForASymbol>(_context);
+        public IGenericRepository<Temp_StockAnalystEstimate> temp_StockAnalystEstimate => _temp_StockAnalystEstimate ??= new GenericRepository<Temp_StockAnalystEstimate>(_context);
+        public IGenericRepository<Temp_CompanyHistoricalMarketCapitalization> temp_CompanyHistoricalMarketCapitalization => _temp_CompanyHistoricalMarketCapitalization ??= new GenericRepository<Temp_CompanyHistoricalMarketCapitalization>(_context);
+
 
 		public void Dispose()
         {

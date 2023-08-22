@@ -35,6 +35,13 @@ namespace P3.FundamentalData.API.Data
         public DbSet<Temp_ETFCountryWeightings> Temp_ETFCountryWeightings { get; set; }
         public DbSet<Temp_ETFStockExposureList> Temp_ETFStockExposureList { get; set; }
 		public DbSet<Temp_MarketRiskPremiumForEachCountry> Temp_MarketRiskPremiumForEachCountry { get; set; }
+		public DbSet<Temp_SenateTradesForSpecificSymbol> Temp_SenateTradesForSpecificSymbol { get; set; }
+		public DbSet<tblInsiderTradingTransactionType> tblInsiderTradingTransactionType { get; set; }
+		public DbSet<Temp_InsiderTradingForASpecificSymbol> Temp_InsiderTradingForASpecificSymbol { get; set; }
+		public DbSet<Temp_StockGradeFromAnalysts> Temp_StockGradeFromAnalysts { get; set; }
+        public DbSet<Temp_StockEarningsSurprisesForASymbol> Temp_StockEarningsSurprisesForASymbol { get; set; }
+		public DbSet<Temp_StockAnalystEstimate> Temp_StockAnalystEstimate { get; set; }
+        public DbSet<Temp_CompanyHistoricalMarketCapitalization> Temp_CompanyHistoricalMarketCapitalization { get; set; }
 	}
        
 }
