@@ -49,6 +49,12 @@ namespace P3.FundamentalData.API.Repository
         private GenericRepository<ESG_RiskRating> _ESG_RiskRatingData;
         private GenericRepository<ESGBenchmarkingBySectorAndYear> _ESGBenchmarkingBySectorAndYearData;
 
+        //Price Target 
+        private GenericRepository<PriceTargetsSummaryForSymbol> _PriceTargetsSummaryForSymbolData;
+
+        //Stock Look Up Tool
+        private GenericRepository<StockScreener> _StockScreenerData;
+
 
 
         private GenericRepository<temp_secfilings> _temp_secfilings;
@@ -109,6 +115,13 @@ namespace P3.FundamentalData.API.Repository
         public IGenericRepository<ESG_Score> ESG_ScoreData => _ESG_ScoreData ??= new GenericRepository<ESG_Score>(_context);
         public IGenericRepository<ESG_RiskRating> ESG_RiskRatingData => _ESG_RiskRatingData ??= new GenericRepository<ESG_RiskRating>(_context);
         public IGenericRepository<ESGBenchmarkingBySectorAndYear> ESGBenchmarkingBySectorAndYearData => _ESGBenchmarkingBySectorAndYearData ??= new GenericRepository<ESGBenchmarkingBySectorAndYear>(_context);
+
+        //Price Target 
+        public IGenericRepository<PriceTargetsSummaryForSymbol> PriceTargetsSummaryForSymbolData => _PriceTargetsSummaryForSymbolData ??= new GenericRepository<PriceTargetsSummaryForSymbol>(_context);
+        
+        //Stock Look Up Tool
+        public IGenericRepository<StockScreener> StockScreenerData => _StockScreenerData ??= new GenericRepository<StockScreener>(_context);
+
 
 
         public IGenericRepository<MajorIndexes> majorIndexesData => _majorIndexes ??= new GenericRepository<MajorIndexes>(_context);
