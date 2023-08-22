@@ -44,6 +44,12 @@ namespace P3.FundamentalData.API.Repository
         private GenericRepository<StockOwnershipByHolders> _StockOwnershipByHoldersData;
         private GenericRepository<InstitutionalHoldingsPortfolioPositionsSummary> _InstitutionalHoldingsPortfolioPositionsSummaryData;
 
+        //ESG_Score
+        private GenericRepository<ESG_Score> _ESG_ScoreData;
+        private GenericRepository<ESG_RiskRating> _ESG_RiskRatingData;
+        private GenericRepository<ESGBenchmarkingBySectorAndYear> _ESGBenchmarkingBySectorAndYearData;
+
+
 
         private GenericRepository<temp_secfilings> _temp_secfilings;
         private GenericRepository<MajorIndexes> _majorIndexes;
@@ -98,6 +104,11 @@ namespace P3.FundamentalData.API.Repository
         public IGenericRepository<InstitutionalStockOwnership> InstitutionalStockOwnershipData => _InstitutionalStockOwnershipData ??= new GenericRepository<InstitutionalStockOwnership>(_context);
         public IGenericRepository<StockOwnershipByHolders> StockOwnershipByHoldersData => _StockOwnershipByHoldersData ??= new GenericRepository<StockOwnershipByHolders>(_context);
         public IGenericRepository<InstitutionalHoldingsPortfolioPositionsSummary> InstitutionalHoldingsPortfolioPositionsSummaryData => _InstitutionalHoldingsPortfolioPositionsSummaryData ??= new GenericRepository<InstitutionalHoldingsPortfolioPositionsSummary>(_context);
+
+        //ESG Score
+        public IGenericRepository<ESG_Score> ESG_ScoreData => _ESG_ScoreData ??= new GenericRepository<ESG_Score>(_context);
+        public IGenericRepository<ESG_RiskRating> ESG_RiskRatingData => _ESG_RiskRatingData ??= new GenericRepository<ESG_RiskRating>(_context);
+        public IGenericRepository<ESGBenchmarkingBySectorAndYear> ESGBenchmarkingBySectorAndYearData => _ESGBenchmarkingBySectorAndYearData ??= new GenericRepository<ESGBenchmarkingBySectorAndYear>(_context);
 
 
         public IGenericRepository<MajorIndexes> majorIndexesData => _majorIndexes ??= new GenericRepository<MajorIndexes>(_context);
