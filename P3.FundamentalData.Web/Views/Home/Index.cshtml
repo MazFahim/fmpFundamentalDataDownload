@@ -1,8 +1,232 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model Screener
+@{
+	ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+	<h1 class="display-4">Welcome</h1>
 </div>
+@* <table>
+    <tbody>
+        <tr>
+            <td class="d-flex justify-content-center align-items-center" style="height: 100%;">
+                <ul class="nav nav-tabs " id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="Descriptive-tab" data-bs-toggle="tab" data-bs-target="#Descriptive" type="button" role="tab" aria-controls="Descriptive" aria-selected="true">Descriptive</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="Fundamental-tab" data-bs-toggle="tab" data-bs-target="#Fundamental" type="button" role="tab" aria-controls="Fundamental" aria-selected="false">Fundamental</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="Technical-tab" data-bs-toggle="tab" data-bs-target="#Technical" type="button" role="tab" aria-controls="Technical" aria-selected="false">Technical</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="All-tab" data-bs-toggle="tab" data-bs-target="#All" type="button" role="tab" aria-controls="All" aria-selected="false">All</button>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table> *@
+<div class="row justify-content-center">
+	<div>
+		<ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<button class="nav-link active" id="Descriptive-tab" data-bs-toggle="tab" data-bs-target="#Descriptive" type="button" role="tab" aria-controls="Descriptive" aria-selected="true">Descriptive</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="Fundamental-tab" data-bs-toggle="tab" data-bs-target="#Fundamental" type="button" role="tab" aria-controls="Fundamental" aria-selected="false">Fundamental</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="Technical-tab" data-bs-toggle="tab" data-bs-target="#Technical" type="button" role="tab" aria-controls="Technical" aria-selected="false">Technical</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="All-tab" data-bs-toggle="tab" data-bs-target="#All" type="button" role="tab" aria-controls="All" aria-selected="false">All</button>
+			</li>
+		</ul>
+
+	</div>
+	<div class="tab-content text-center mt-2" id="myTabContent">
+		<div class="tab-pane fade show active" id="Descriptive" role="tabpanel" aria-labelledby="Descriptive-tab">
+			<div class="row">
+				<div class="col-md-2">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">Exchange</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">Index</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">Index</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">Index</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">Industry</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">Sector</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">Sector</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+
+				<div class="col-md-2">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">Sector</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="tab-pane fade" id="Fundamental" role="tabpanel" aria-labelledby="Fundamental-tab">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">P/E</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">Forward P/E</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">PEG</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">P/S</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="tab-pane fade" id="Technical" role="tabpanel" aria-labelledby="Technical-tab">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">Performance</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">Performance 2</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">Volatility</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-floating mb-2">
+						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+							@* <option value="Any" selected>Any</option> *@
+						</select>
+						<label asp-for="Exchange" class="control-label">RSI (14)</label>
+						<span asp-validation-for="Exchange" class="text-danger"></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="All" role="tabpanel" aria-labelledby="All-tab">All</div>
+	</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	$(document).ready(function () {
+		$('#All-tab').click(function () {
+			// Show the "All" tab content
+			$('.tab-content .tab-pane').removeClass('show active');
+			$('#All').addClass('show active');
+
+			// Combine content from all tabs
+			var combinedContent = '';
+			$('#Descriptive, #Fundamental, #Technical').each(function () {
+				combinedContent += $(this).html();
+			});
+			$('#All').html(combinedContent);
+		});
+	});
+</script>
+
+
+
+
