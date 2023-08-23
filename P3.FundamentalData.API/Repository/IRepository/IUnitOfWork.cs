@@ -84,6 +84,9 @@ namespace P3.FundamentalData.API.Repository.IRepository
         IGenericRepository<Temp_StockAnalystEstimate> temp_StockAnalystEstimate { get; }
         IGenericRepository<Temp_CompanyHistoricalMarketCapitalization> temp_CompanyHistoricalMarketCapitalization { get; }
 
+        //Screener Variable
+        IGenericRepository<ScreenerVariable> ScreenerVariableData { get; }
+
 
 		Task SaveAsync();
     }

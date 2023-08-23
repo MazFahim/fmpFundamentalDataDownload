@@ -78,7 +78,13 @@ namespace P3.FundamentalData.API.Data
         public DbSet<Temp_StockEarningsSurprisesForASymbol> Temp_StockEarningsSurprisesForASymbol { get; set; }
 		public DbSet<Temp_StockAnalystEstimate> Temp_StockAnalystEstimate { get; set; }
         public DbSet<Temp_CompanyHistoricalMarketCapitalization> Temp_CompanyHistoricalMarketCapitalization { get; set; }
-	}
+
+
+
+
+        // Screener Variable
+        public DbSet<ScreenerVariable> tblScreenerVariable { get; set; }
+    }
        
 }
     
