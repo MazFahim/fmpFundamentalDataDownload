@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using P3.FundamentalData.API.Models;
 using P3.FundamentalData.API.Repository.IRepository;
+using System;
 
 namespace P3.FundamentalData.API.Controllers
 {
@@ -25,7 +26,8 @@ namespace P3.FundamentalData.API.Controllers
         public async Task<IActionResult> Get()
         {
             var screenerVariables = await _unitOfWork.ScreenerVariableData.GetAllAsync();
-            return Ok(screenerVariables);
+            var abc = JsonConvert.SerializeObject(screenerVariables);
+            return Ok(abc);
         }
         [HttpPost]
         public async Task<IActionResult> Post(ScreenerVariable model)
