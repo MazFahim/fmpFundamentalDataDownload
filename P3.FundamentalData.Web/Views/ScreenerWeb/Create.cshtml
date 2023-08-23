@@ -1,0 +1,40 @@
+﻿@model P3.FundamentalData.Web.Models.ScreenerVariableDTO
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Screener Form</title>
+</head>
+<body>
+
+    <form asp-action="Create" method="post">
+        <div class="col-6">
+            <div class="form-floating mb-2">
+                <input asp-for="varType" class="form-control" />
+                <label asp-for="varType" class="control-label">Type</label>
+                <span asp-validation-for="varType" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating mb-2">
+                <input asp-for="varName" class="form-control" />
+                <label asp-for="varName" class="control-label">Name</label>
+                <span asp-validation-for="varName" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-floating mb-2">
+                <select asp-for="Category" class="form-control" asp-items="ViewBag.CategoryOptions">
+                    <option disabled selected>--Select Category--</option>
+                </select>
+                <label asp-for="Category" class="control-label">Category</label>
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+
+</body>
+</html>

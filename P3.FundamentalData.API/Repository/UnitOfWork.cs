@@ -80,6 +80,9 @@ namespace P3.FundamentalData.API.Repository
         private GenericRepository<Temp_CompanyHistoricalMarketCapitalization> _temp_CompanyHistoricalMarketCapitalization;
 
 
+        //Screener Variable
+        private GenericRepository<ScreenerVariable> _ScreenerVariableData;
+
 		public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
@@ -155,7 +158,12 @@ namespace P3.FundamentalData.API.Repository
         public IGenericRepository<Temp_CompanyHistoricalMarketCapitalization> temp_CompanyHistoricalMarketCapitalization => _temp_CompanyHistoricalMarketCapitalization ??= new GenericRepository<Temp_CompanyHistoricalMarketCapitalization>(_context);
 
 
-		public void Dispose()
+        //Screener Variable
+        public IGenericRepository<ScreenerVariable> ScreenerVariableData => _ScreenerVariableData ??= new GenericRepository<ScreenerVariable>(_context);
+
+
+
+        public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
