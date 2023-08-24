@@ -74,8 +74,8 @@ namespace P3.FundamentalData.Web.Models
 		public string Float { get; set; }
 		public string AfterHoursClose  { get; set; }
 		public string AfterHoursChange  { get; set; }
-        public SelectListItem ExchangeList { get; set; }
-		public SelectListItem IndexList { get; set; }
+        public List<SelectListItem> ExchangeList { get; set; }
+		public List<SelectListItem> IndexList { get; set; }
 		public SelectListItem SectorList { get; set; }
 		public SelectListItem IndustryList { get; set; }
 		public SelectListItem CountryList { get; set; }

@@ -6,28 +6,6 @@
 <div class="text-center">
 	<h1 class="display-4">Welcome</h1>
 </div>
-@* <table>
-    <tbody>
-        <tr>
-            <td class="d-flex justify-content-center align-items-center" style="height: 100%;">
-                <ul class="nav nav-tabs " id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="Descriptive-tab" data-bs-toggle="tab" data-bs-target="#Descriptive" type="button" role="tab" aria-controls="Descriptive" aria-selected="true">Descriptive</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="Fundamental-tab" data-bs-toggle="tab" data-bs-target="#Fundamental" type="button" role="tab" aria-controls="Fundamental" aria-selected="false">Fundamental</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="Technical-tab" data-bs-toggle="tab" data-bs-target="#Technical" type="button" role="tab" aria-controls="Technical" aria-selected="false">Technical</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="All-tab" data-bs-toggle="tab" data-bs-target="#All" type="button" role="tab" aria-controls="All" aria-selected="false">All</button>
-                    </li>
-                </ul>
-            </td>
-        </tr>
-    </tbody>
-</table> *@
 <div class="row justify-content-center">
 	<div>
 		<ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
@@ -51,7 +29,7 @@
 			<div class="row">
 				<div class="col-md-2">
 					<div class="form-floating mb-2">
-						<select asp-for="Exchange" class="form-control" asp-items="ViewBag.Exchange">
+						<select asp-for="Exchange" class="form-control" asp-items="Model.ExchangeList">
 							@* <option value="Any" selected>Any</option> *@
 						</select>
 						<label asp-for="Exchange" class="control-label">Exchange</label>

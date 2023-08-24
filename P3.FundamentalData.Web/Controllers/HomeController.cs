@@ -16,13 +16,19 @@ namespace P3.FundamentalData.Web.Controllers
 
 		public IActionResult Index()
 		{
-			ViewBag.Exchange = new List<SelectListItem>
-					 {
-						new SelectListItem { Value = "Any", Text = "Any" },
+			ViewBag.Exchange =
+				new List<SelectListItem> {
+					new SelectListItem { Value = "Any", Text = "Any" },
 						new SelectListItem { Value = "AMEX", Text = "AMEX" },
 						new SelectListItem { Value = "NYSE", Text = "NYSE" },
 						new SelectListItem { Value = "NASDAQ", Text = "NASDAQ" }
-					 };
+				};
+			//{
+			//new SelectListItem { Value = "Any", Text = "Any" },
+			//new SelectListItem { Value = "AMEX", Text = "AMEX" },
+			//new SelectListItem { Value = "NYSE", Text = "NYSE" },
+			//new SelectListItem { Value = "NASDAQ", Text = "NASDAQ" }
+			//};
 			//var defaultValue = new SelectListItem { Value = "Any", Text = "Any" };
 			//ViewBag.Exchange = new SelectList(
 			//	new List<SelectListItem>
@@ -31,7 +37,19 @@ namespace P3.FundamentalData.Web.Controllers
 			//		 new SelectListItem { Value = "NYSE", Text = "NYSE" },
 			//		 new SelectListItem { Value = "NASDAQ", Text = "NASDAQ" }
 			//	 });
-			return View();
+
+			Screener model = new Screener()
+			{
+				ExchangeList = new List<SelectListItem>
+				{
+					new SelectListItem { Value = "Any", Text = "Any" },
+					new SelectListItem { Value = "AMEX", Text = "AMEX" },
+					new SelectListItem { Value = "NYSE", Text = "NYSE" },
+					new SelectListItem { Value = "NASDAQ", Text = "NASDAQ" }
+				}
+			};
+			//model.ExchangeList = new SelectList(await _unitOfWork.Screener.GetAllAsync(x => x.VarType == "Exchange"), "VarName", "varName");
+			return View(model);
 		}
 
 		public IActionResult Privacy()
