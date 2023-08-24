@@ -9,6 +9,7 @@ namespace P3.FundamentalData.API.Repository.IRepository
                     Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
                     List<string>? includes = null);
         Task<T> GetFirstOrDefault(Expression<Func<T, bool>> expression, List<string>? includes = null);
+        
         Task CreateAsync(T entity);
         Task CreateAsync(List<T> entity);
         void UpdateAsync(T entity);

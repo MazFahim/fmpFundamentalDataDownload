@@ -76,5 +76,6 @@ namespace P3.FundamentalData.API.Repository
         {
             await _context.Database.ExecuteSqlRawAsync(param);
         }
+        
     }
 }

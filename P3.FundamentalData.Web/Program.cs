@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using P3.FundamentalData.Web.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<P3FundamentalDataWebContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("P3FundamentalDataWebContext") ?? throw new InvalidOperationException("Connection string 'P3FundamentalDataWebContext' not found.")));
 
 builder.Services.AddHttpClient(); 
 // Add services to the container.

@@ -58,8 +58,9 @@ namespace P3.FundamentalData.Web.Controllers
 
             return View(model);
         }
+        //Index Actions
         [HttpGet]
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient("baseurl");
             var response = await client.GetAsync("/api/ScreenerVariable");
@@ -73,6 +74,61 @@ namespace P3.FundamentalData.Web.Controllers
             else
             {
                 return View(new List<ScreenerVariableDTO>());
+            }
+        }
+        //Edit Portion
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.GetAsync($"/api/ScreenerVariable/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var screenerVariable = JsonConvert.DeserializeObject<ScreenerVariableDTO>(content);
+                return View(screenerVariable);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ScreenerVariableDTO model)
+        {
+            if (ModelState.IsValid)
+            {
+                var client = _httpClientFactory.CreateClient("baseurl");
+                var jsonContent = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+                var response = await client.PutAsync($"/api/ScreenerVariable/{model.Id}", jsonContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Error while communicating with API");
+                }
+            }
+
+            return View(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var client = _httpClientFactory.CreateClient("baseurl");
+            var response = await client.DeleteAsync($"/api/ScreenerVariable/{id}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return NotFound();
             }
         }
     }

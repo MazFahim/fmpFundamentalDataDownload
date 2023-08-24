@@ -7,9 +7,9 @@ namespace P3.FundamentalData.API.Models
         [Key]
         public Guid Id { get; set; } = Guid.NewGuid();
         public string varType { get; set; }
-        [Required]
+        //[Required]
         public string varName { get; set; } = "any";
-        [Required]
+        //[Required]
         public string Category { get; set; }
 
         
