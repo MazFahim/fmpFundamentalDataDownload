@@ -13,12 +13,10 @@
     <thead>
         <tr>
             <th>
-                @*@Html.DisplayNameFor(model => model.varType)*@
-                Label
+                @Html.DisplayNameFor(model => model.varType)
             </th>
             <th>
-                @*@Html.DisplayNameFor(model => model.varName)*@
-                Label Value
+                @Html.DisplayNameFor(model => model.varName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Category)
@@ -39,11 +37,9 @@
                 @Html.DisplayFor(modelItem => item.Category)
             </td>
             <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
-                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }

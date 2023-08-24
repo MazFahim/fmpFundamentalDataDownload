@@ -4,6 +4,7 @@ namespace P3.FundamentalData.Web.Models
 {
     public class ScreenerVariableDTO
     {
+        public Guid Id { get; set; }
         public string varType { get; set; }
         public string varName { get; set; }
         public string Category { get; set; }
