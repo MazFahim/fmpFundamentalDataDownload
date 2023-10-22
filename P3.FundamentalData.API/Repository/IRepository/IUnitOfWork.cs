@@ -18,11 +18,12 @@ namespace P3.FundamentalData.API.Repository.IRepository
 
         IGenericRepository<SharesFloat> SharesFloatData { get; }
         IGenericRepository<CompanyNotesDue> CompanyNotesDueData { get; }
-        IGenericRepository<CompanyFinancialRatio> CompanyFinancialRatioData { get; }
-        IGenericRepository<CompanyFinancialRatiosTTM> CompanyFinancialRatiosTTMData { get; }
 
-        //Stock Fundamental Analysis
-        IGenericRepository<StockFInancialScores> StockFInancialScoresData { get; }
+
+		//Stock Fundamental Analysis
+		IGenericRepository<CompanyFinancialRatio> CompanyFinancialRatioData { get; }
+		IGenericRepository<CompanyFinancialRatiosTTM> CompanyFinancialRatiosTTMData { get; }
+		IGenericRepository<StockFInancialScores> StockFInancialScoresData { get; }
         IGenericRepository<OwnersEarning> OwnersEarningData { get; }
         IGenericRepository<CompanyEnterpriseValue> CompanyEnterpriseValueData { get; }
         IGenericRepository<IncomeStatementsGrowth> IncomeStatementsGrowthData { get; }

@@ -22,11 +22,12 @@ namespace P3.FundamentalData.API.Data
         public DbSet<InternationalFilings> Temp_InternationalFilings { get; set; }
         public DbSet<SharesFloat> Temp_SharesFloat { get; set; }
         public DbSet<CompanyNotesDue> Temp_CompanyNotesDue { get; set; }
-        public DbSet<CompanyFinancialRatio> Temp_CompanyFinancialRatios { get; set; }
-        public DbSet<CompanyFinancialRatiosTTM> Temp_CompanyFinancialRatiosTTM { get; set; }
 
-        //Stock Fundamentals Analysis
-        public DbSet<StockFInancialScores> Temp_StockFinancialScores { get; set; }
+
+		//Stock Fundamentals Analysis
+		public DbSet<CompanyFinancialRatio> Temp_CompanyFinancialRatios { get; set; }
+		public DbSet<CompanyFinancialRatiosTTM> Temp_CompanyFinancialRatiosTTM { get; set; }
+		public DbSet<StockFInancialScores> Temp_StockFinancialScores { get; set; }
         public DbSet<OwnersEarning> Temp_OwnerEarnings{ get; set; }
         public DbSet<CompanyEnterpriseValue> Temp_CompanyEnterpriseValue { get; set; }
         public DbSet<IncomeStatementsGrowth> Temp_IncomeStatementsGrowth { get; set; }

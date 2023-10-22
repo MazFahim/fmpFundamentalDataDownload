@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P3.FundamentalData.API", "P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "P3.FundamentalData.Web", "P3.FundamentalData.Web\P3.FundamentalData.Web.csproj", "{97AED262-9696-4D06-9BCE-C34C12949A48}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BackTestTrial", "BackTestTrial\BackTestTrial.csproj", "{7D2F0071-551C-4494-A079-B8FA9400124A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{97AED262-9696-4D06-9BCE-C34C12949A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{97AED262-9696-4D06-9BCE-C34C12949A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{97AED262-9696-4D06-9BCE-C34C12949A48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D2F0071-551C-4494-A079-B8FA9400124A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D2F0071-551C-4494-A079-B8FA9400124A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D2F0071-551C-4494-A079-B8FA9400124A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D2F0071-551C-4494-A079-B8FA9400124A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
